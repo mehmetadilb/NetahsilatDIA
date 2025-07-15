@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://erpdemosrv.netahsilatservice.com/Cat/CurrentAccountTransaction.svc?wsdl" filename="CurrentAccountTransaction.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd0" filename="CurrentAccountTransaction.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd1" filename="CurrentAccountTransaction0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd2" filename="CurrentAccountTransaction1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd3" filename="CurrentAccountTransaction2.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd4" filename="CurrentAccountTransaction3.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd5" filename="CurrentAccountTransaction4.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd6" filename="CurrentAccountTransaction5.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

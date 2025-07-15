@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" />
+  <xs:complexType name="CurrentAccountTransactionAddResult">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" base="q1:ResultBase">
+        <xs:sequence>
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="CurrentAccountTransactionList" nillable="true" type="q2:ArrayOfCATCreateOrUpdateResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CurrentAccountTransactionAddResult" nillable="true" type="tns:CurrentAccountTransactionAddResult" />
+  <xs:complexType name="CurrentAccountTransactionDeleteResult">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" base="q3:ResultBase">
+        <xs:sequence>
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="CurrentAccountTransactionList" nillable="true" type="q4:ArrayOfCATDeleteResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CurrentAccountTransactionDeleteResult" nillable="true" type="tns:CurrentAccountTransactionDeleteResult" />
+  <xs:complexType name="CurrentAccountTransactionGetResult">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" base="q5:ResultBase">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="CurrentAccountTransactionList" nillable="true" type="q6:ArrayOfCATGetResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CurrentAccountTransactionGetResult" nillable="true" type="tns:CurrentAccountTransactionGetResult" />
+  <xs:complexType name="BankPaymentsResult">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" base="q7:ResultBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BankPaymentList" nillable="true" type="tns:ArrayOfBankPaymentsSumsModel" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankPaymentsResult" nillable="true" type="tns:BankPaymentsResult" />
+  <xs:complexType name="ArrayOfBankPaymentsSumsModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BankPaymentsSumsModel" nillable="true" type="tns:BankPaymentsSumsModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBankPaymentsSumsModel" nillable="true" type="tns:ArrayOfBankPaymentsSumsModel" />
+  <xs:complexType name="BankPaymentsSumsModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BankId" type="xs:int" />
+      <xs:element minOccurs="0" name="BankName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentSumTotal" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BankPaymentsSumsModel" nillable="true" type="tns:BankPaymentsSumsModel" />
+  <xs:complexType name="UpdateMaxInstallmentResult">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" base="q8:ResultBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UpdateMaxInstallmentResult" nillable="true" type="tns:UpdateMaxInstallmentResult" />
+  <xs:complexType name="SendCATDebtInfoMailResult">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" base="q9:ResultBase">
+        <xs:sequence>
+          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="CurrentAccountTransactionList" nillable="true" type="q10:ArrayOfCATCreateOrUpdateResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SendCATDebtInfoMailResult" nillable="true" type="tns:SendCATDebtInfoMailResult" />
+</xs:schema>

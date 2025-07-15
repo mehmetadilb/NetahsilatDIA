@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd9" filename="ErpWebService.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://erpdemosrv.netahsilatservice.com/Erp/ErpWebService.svc?wsdl" filename="ErpWebService.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd0" filename="ErpWebService0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd1" filename="ErpWebService1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd2" filename="ErpWebService2.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd3" filename="ErpWebService3.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd4" filename="ErpWebService4.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd5" filename="ErpWebService5.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd6" filename="ErpWebService6.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd7" filename="ErpWebService7.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd8" filename="ErpWebService8.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd10" filename="ErpWebService9.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd11" filename="ErpWebService10.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

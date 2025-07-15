@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PGWService.Models.WCF.Integration" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PGWService.Models.WCF.Integration" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.VendorPaymentService" />
+  <xs:complexType name="PasswordChangeResult">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.VendorPaymentService" base="q1:ResultBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PasswordChangeResult" nillable="true" type="tns:PasswordChangeResult" />
+  <xs:complexType name="ArrayOfPaymentModelByProduct">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PaymentModelByProduct" nillable="true" type="tns:PaymentModelByProduct" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPaymentModelByProduct" nillable="true" type="tns:ArrayOfPaymentModelByProduct" />
+  <xs:complexType name="PaymentModelByProduct">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BankName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardHolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClientReferenceCod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Data" nillable="true" type="tns:ArrayOfProductItemModel" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Installment" type="xs:int" />
+      <xs:element minOccurs="0" name="Ip" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentId" type="xs:int" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SalesDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SalesPersonNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StoreId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TcknOrVkn" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentModelByProduct" nillable="true" type="tns:PaymentModelByProduct" />
+  <xs:complexType name="ArrayOfProductItemModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProductItemModel" nillable="true" type="tns:ProductItemModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProductItemModel" nillable="true" type="tns:ArrayOfProductItemModel" />
+  <xs:complexType name="ProductItemModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProductId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SalesAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SalesNetAmount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductItemModel" nillable="true" type="tns:ProductItemModel" />
+</xs:schema>

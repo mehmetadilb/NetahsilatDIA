@@ -1,0 +1,57 @@
+{
+  "Parameters": {
+    "ERP_SERVICE": "https://erpdemosrv.netahsilatservice.com/erp/erpwebservice.svc",
+    "ACCOUNT_SERVICE": "",
+    "VENDOR_SERVICE": "",
+    "WEB_SERVICE_UID": "erptest@ecozum.com",
+    "WEB_SERVICE_PWD": "Mm1234!\u002B\u002B",
+    "DiaBaseUrl": "https://finrota.ws.dia.com.tr/api/v3/",
+    "DiaApiEndpoint": "sis/json",
+    "DiaSessionErrorMessageHint": null,
+    "Firms": [
+      {
+        "Company": 34,
+        "Period": 1,
+        "DiaUserName": "ws",
+        "DiaPassword": "ws",
+        "DisconnectSameUser": true,
+        "DiaLang": "TR",
+        "DiaToken": "5f439cca-e3be-456b-b316-e61dcb3a1444",
+        "IsActive": true
+      }
+    ]
+  },
+  "GlobalSettings": {
+    "USE_MULTIFIRM": false,
+    "FIRMS": null,
+    "TMR_INTERVAL": 15,
+    "CREDIT_CARD_NUMBER_FIELD": "",
+    "CURRENCY_TYPE": "",
+    "SET_REVERSAL": true,
+    "IS_TRANSFER_REPAYMENTPLAN": true,
+    "CUSTOMERPAYMENTSETS": [
+      {
+        "Id": "e70f2a00-aec8-4266-853e-671c38593fc8",
+        "CustomerPrefix": "",
+        "PaymentSetId": "1",
+        "FirmNo": ""
+      }
+    ],
+    "ADD_COMMISSION_LINE": false,
+    "ACCOUNT_ERPCODE_FIELD": 0,
+    "CUSTOMER_TRANSFER_TYPE": 0,
+    "TRANSFER_MODE": "",
+    "PUBLIC_DESCRIPTION_FORMAT": "",
+    "LINE_DESCRIPTION_FORMAT": "",
+    "SEND_EMAIL": false,
+    "OUT_OF_COMMISSION": 0,
+    "PAYMENT_SET_CODE": false,
+    "NONCUSTOMER_PAYMENT_TYPE": 0,
+    "NONCUSTOMER_BAGACCOUNT": "",
+    "SEND_TRANSFER_TRANS": false,
+    "CURRENT_ACCOUNT_TYPE_ID": 0,
+    "RECEIPT_TYPE_TO_BE_TRANSFERRED": 0,
+    "WORK_HOURS": null,
+    "GET_BANK_PAYMENT": false
+  }
+}

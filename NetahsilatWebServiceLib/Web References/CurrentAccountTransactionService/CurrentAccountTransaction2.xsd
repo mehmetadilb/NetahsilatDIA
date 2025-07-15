@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfCATCreateOrUpdateParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CATCreateOrUpdateParameters" nillable="true" type="tns:CATCreateOrUpdateParameters" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCATCreateOrUpdateParameters" nillable="true" type="tns:ArrayOfCATCreateOrUpdateParameters" />
+  <xs:complexType name="CATCreateOrUpdateParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountErpCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ActType2Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ActTypeCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AmountTL" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CrDr" type="xs:int" />
+      <xs:element minOccurs="0" name="CurrencyCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DepartmentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DepartmentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Details" nillable="true" type="q1:ArrayOfArrayOfstring" />
+      <xs:element minOccurs="0" name="DivisionCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DivisionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DueDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExchangeRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FirstPaymentDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsPaymentEnabled" type="xs:int" />
+      <xs:element minOccurs="0" name="IsReccurringPayment" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MaxInstallment" type="xs:int" />
+      <xs:element minOccurs="0" name="Options" nillable="true" type="tns:ArrayOfCATOption" />
+      <xs:element minOccurs="0" name="PaidAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PaidAmountTL" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PaymentSetCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TransactionDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="_DueDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="_FirstPaymentDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="_TransactionDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CATCreateOrUpdateParameters" nillable="true" type="tns:CATCreateOrUpdateParameters" />
+  <xs:complexType name="ArrayOfCATOption">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CATOption" nillable="true" type="tns:CATOption" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCATOption" nillable="true" type="tns:ArrayOfCATOption" />
+  <xs:complexType name="CATOption">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AmountTL" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ExchangeRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Installment" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CATOption" nillable="true" type="tns:CATOption" />
+  <xs:complexType name="ArrayOfCATCreateOrUpdateResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CATCreateOrUpdateResult" nillable="true" type="tns:CATCreateOrUpdateResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCATCreateOrUpdateResult" nillable="true" type="tns:ArrayOfCATCreateOrUpdateResult" />
+  <xs:complexType name="CATCreateOrUpdateResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ExecuteServiceResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CATCreateOrUpdateResult" nillable="true" type="tns:CATCreateOrUpdateResult" />
+  <xs:complexType name="ExecuteServiceResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:ExecuteStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExecuteServiceResult" nillable="true" type="tns:ExecuteServiceResult" />
+  <xs:simpleType name="ExecuteStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Error">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ExecuteStatus" nillable="true" type="tns:ExecuteStatus" />
+  <xs:complexType name="ArrayOfCATDeleteParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CATDeleteParameters" nillable="true" type="tns:CATDeleteParameters" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCATDeleteParameters" nillable="true" type="tns:ArrayOfCATDeleteParameters" />
+  <xs:complexType name="CATDeleteParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CATDeleteParameters" nillable="true" type="tns:CATDeleteParameters" />
+  <xs:complexType name="ArrayOfCATDeleteResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CATDeleteResult" nillable="true" type="tns:CATDeleteResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCATDeleteResult" nillable="true" type="tns:ArrayOfCATDeleteResult" />
+  <xs:complexType name="CATDeleteResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ExecuteServiceResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CATDeleteResult" nillable="true" type="tns:CATDeleteResult" />
+  <xs:complexType name="ArrayOfCATGetParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CATGetParameters" nillable="true" type="tns:CATGetParameters" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCATGetParameters" nillable="true" type="tns:ArrayOfCATGetParameters" />
+  <xs:complexType name="CATGetParameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CATGetParameters" nillable="true" type="tns:CATGetParameters" />
+  <xs:complexType name="ArrayOfCATGetResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CATGetResult" nillable="true" type="tns:CATGetResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCATGetResult" nillable="true" type="tns:ArrayOfCATGetResult" />
+  <xs:complexType name="CATGetResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Transaciton" nillable="true" type="tns:CAT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CATGetResult" nillable="true" type="tns:CATGetResult" />
+  <xs:complexType name="CAT">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActTypeCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AmountTL" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CrDr" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatedOn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CurrencyCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DueDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExchangeRate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsPaymentEnabled" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxInstallment" type="xs:int" />
+      <xs:element minOccurs="0" name="PaidAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PaidAmountTL" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TransactionDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdatedOn" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CAT" nillable="true" type="tns:CAT" />
+  <xs:complexType name="ArrayOfValorInstallment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ValorInstallment" nillable="true" type="tns:ValorInstallment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfValorInstallment" nillable="true" type="tns:ArrayOfValorInstallment" />
+  <xs:complexType name="ValorInstallment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Installment" type="xs:int" />
+      <xs:element minOccurs="0" name="Valor" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValorInstallment" nillable="true" type="tns:ValorInstallment" />
+</xs:schema>

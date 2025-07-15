@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.Enums" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="CreateOrUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q1:AuthenticationInfo" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="parameters" nillable="true" type="q2:ArrayOfCATCreateOrUpdateParameters" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateOrUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="CreateOrUpdateResult" nillable="true" type="q3:CurrentAccountTransactionAddResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Delete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q4:AuthenticationInfo" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="parameters" nillable="true" type="q5:ArrayOfCATDeleteParameters" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="DeleteResult" nillable="true" type="q6:CurrentAccountTransactionDeleteResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteALL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q7:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="vendorErpCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="accountErpCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteALLResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="DeleteALLResult" nillable="true" type="q8:CurrentAccountTransactionDeleteResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q9:AuthenticationInfo" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="parameters" nillable="true" type="q10:ArrayOfCATGetParameters" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetResult" nillable="true" type="q11:CurrentAccountTransactionGetResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BankPaymentSumsIntegrated">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q12:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BankPaymentSumsIntegratedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="BankPaymentSumsIntegratedResult" nillable="true" type="q13:BankPaymentsResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteByDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q14:AuthenticationInfo" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.Enums" minOccurs="0" name="dateType" type="q15:DateType" />
+        <xs:element minOccurs="0" name="threshold" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteByDateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="DeleteByDateResult" nillable="true" type="q16:CurrentAccountTransactionDeleteResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteByDateCron">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parameters" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteByDateCronResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="DeleteByDateCronResult" nillable="true" type="q17:CurrentAccountTransactionDeleteResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateMaxInstallment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q18:AuthenticationInfo" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="InstallmentMapss" nillable="true" type="q19:ArrayOfValorInstallment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateMaxInstallmentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="UpdateMaxInstallmentResult" nillable="true" type="q20:UpdateMaxInstallmentResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendCATDebtInfoMail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q21:AuthenticationInfo" />
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="erpCodeList" nillable="true" type="q22:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendCATDebtInfoMailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="SendCATDebtInfoMailResult" nillable="true" type="q23:SendCATDebtInfoMailResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

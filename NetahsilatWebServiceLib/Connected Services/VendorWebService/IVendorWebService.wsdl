@@ -1,0 +1,1103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" xmlns:tns="http://tempuri.org/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="IVendorWebService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" />
+      <xs:element name="CreateVendor">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q1:AuthenticationInfo" />
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="vendorData" nillable="true" type="q2:VendorData" />
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="userData" nillable="true" type="q3:UserData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateVendorResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="CreateVendorResult" nillable="true" type="q4:CreateVendorResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateVendorUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q5:AuthenticationInfo" />
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="userData" nillable="true" type="q6:UserData" />
+            <xs:element minOccurs="1" name="vendorCode" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateVendorUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="CreateVendorUserResult" nillable="true" type="q7:CreateVendorUserResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateCustomer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q8:AuthenticationInfo" />
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="customerData" nillable="true" type="q9:CustomerData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateCustomerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="CreateCustomerResult" nillable="true" type="q10:CreateCustomerResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateVendor">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q11:AuthenticationInfo" />
+            <xs:element minOccurs="1" name="vendorCode" nillable="true" type="xs:string" />
+            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="vendorData" nillable="true" type="q12:VendorData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateVendorResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="UpdateVendorResult" nillable="true" type="q13:UpdateResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateVendorUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q14:AuthenticationInfo" />
+            <xs:element minOccurs="1" name="userEmail" nillable="true" type="xs:string" />
+            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="userData" nillable="true" type="q15:UserData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateVendorUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="UpdateVendorUserResult" nillable="true" type="q16:UpdateResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateVendorUserByCode">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q17:AuthenticationInfo" />
+            <xs:element minOccurs="1" name="userCode" nillable="true" type="xs:string" />
+            <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="userdata" nillable="true" type="q18:UserData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateVendorUserByCodeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="UpdateVendorUserByCodeResult" nillable="true" type="q19:UpdateResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateCustomer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q20:AuthenticationInfo" />
+            <xs:element minOccurs="1" name="customerCode" nillable="true" type="xs:string" />
+            <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="customerData" nillable="true" type="q21:CustomerData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateCustomerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="UpdateCustomerResult" nillable="true" type="q22:UpdateResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateOrUpdateCurrentAccount">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q23:AuthenticationInfo" />
+            <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="currentAccountData" nillable="true" type="q24:CurrentAccountData" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateOrUpdateCurrentAccountResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="CreateOrUpdateCurrentAccountResult" nillable="true" type="q25:CreateCurrentAccountResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAgentByERPCode">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q26:AuthenticationInfo" />
+            <xs:element minOccurs="1" name="erpCode" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAgentByERPCodeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="GetAgentByERPCodeResult" nillable="true" type="q27:AgentResultPayment" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAgentByCode">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q28:AuthenticationInfo" />
+            <xs:element minOccurs="1" name="code" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetAgentByCodeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="GetAgentByCodeResult" nillable="true" type="q29:AgentResultPayment" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPaymentsByAgent">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="erpCode" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPaymentsByAgentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="GetPaymentsByAgentResult" nillable="true" type="q30:VendorPaymentServiceModelListResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPaymentSetGroupList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q31:AuthenticationInfo" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetPaymentSetGroupListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="GetPaymentSetGroupListResult" nillable="true" type="q32:VendorPaymentSetGroupModelListResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteCreditCardByVendorCode">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="authInfo" nillable="true" type="q33:AuthenticationInfo" />
+            <xs:element minOccurs="1" name="vendorCode" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteCreditCardByVendorCodeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="1" name="DeleteCreditCardByVendorCodeResult" nillable="true" type="q34:DeleteCreditCardResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:complexType name="AuthenticationInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="AuthenticationInfo" nillable="true" type="tns:AuthenticationInfo" />
+      <xs:complexType name="VendorData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AddDefaultCurrentAccount" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CanCancelPayment" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CanCreateCustomer" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CanCreateVendor" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CanMakePayment" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CountryCodeISO" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CurrencyTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="CurrentAccountGroupCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpFirmCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsCheckMemberIPActive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsCompany" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ParentCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentUserEmail" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentSetGroupDefinitionId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentSetId" type="xs:int" />
+          <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TCKN" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxOffice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionLimit" nillable="true" type="tns:TransactionLimit" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="VendorData" nillable="true" type="tns:VendorData" />
+      <xs:complexType name="TransactionLimit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Daily" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Instant" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Monthly" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TransactionLimit" nillable="true" type="tns:TransactionLimit" />
+      <xs:complexType name="UserData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CountryCodeISO" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RoleGroupId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="SendMail" type="xs:boolean" />
+          <xs:element minOccurs="0" name="TCKN" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="UserData" nillable="true" type="tns:UserData" />
+      <xs:complexType name="CreateVendorResult">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="UserId" type="xs:int" />
+              <xs:element minOccurs="0" name="VendorCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="VendorId" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="CreateVendorResult" nillable="true" type="tns:CreateVendorResult" />
+      <xs:complexType name="ResultBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ResultBase" nillable="true" type="tns:ResultBase" />
+      <xs:complexType name="CreateVendorUserResult">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="UserId" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="CreateVendorUserResult" nillable="true" type="tns:CreateVendorUserResult" />
+      <xs:complexType name="CustomerData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AddDefaultCurrentAccount" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CityCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CountryCodeISO" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" name="CurrencyTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="CurrentAccountGroupCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpFirmCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsCompany" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentUserEmail" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" name="PaymentSetId" type="xs:int" />
+          <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SendMail" type="xs:boolean" />
+          <xs:element minOccurs="0" name="TCKN" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxOffice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionLimit" nillable="true" type="tns:TransactionLimit" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CustomerData" nillable="true" type="tns:CustomerData" />
+      <xs:complexType name="CreateCustomerResult">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="CustomerCode" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="CustomerId" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="CreateCustomerResult" nillable="true" type="tns:CreateCustomerResult" />
+      <xs:complexType name="UpdateResult">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="UpdateResult" nillable="true" type="tns:UpdateResult" />
+      <xs:complexType name="CurrentAccountData">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CurrencyCodes" nillable="true" type="q1:ArrayOfint" />
+          <xs:element minOccurs="0" name="CurrentAccountTypeId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpFirmCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="IsUsableBySubVendor" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsVisibleOnPaymentWithPaymentItemSection" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsVisibleOnSimplePaymentSection" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentSetDefinitionId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="VendorErpCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CurrentAccountData" nillable="true" type="tns:CurrentAccountData" />
+      <xs:complexType name="CreateCurrentAccountResult">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="CreateCurrentAccountResult" nillable="true" type="tns:CreateCurrentAccountResult" />
+      <xs:complexType name="AgentResultPayment">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence>
+              <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="Agent" nillable="true" type="q2:Agent" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="AgentResultPayment" nillable="true" type="tns:AgentResultPayment" />
+      <xs:complexType name="VendorPaymentServiceModelListResult">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence>
+              <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" minOccurs="0" name="Payments" nillable="true" type="q3:ArrayOfPaymentServiceModel" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="VendorPaymentServiceModelListResult" nillable="true" type="tns:VendorPaymentServiceModelListResult" />
+      <xs:complexType name="VendorPaymentSetGroupModelListResult">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="PaymentSetGroups" nillable="true" type="tns:ArrayOfPaymentSetGroupDefinition" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="VendorPaymentSetGroupModelListResult" nillable="true" type="tns:VendorPaymentSetGroupModelListResult" />
+      <xs:complexType name="ArrayOfPaymentSetGroupDefinition">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PaymentSetGroupDefinition" nillable="true" type="tns:PaymentSetGroupDefinition" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfPaymentSetGroupDefinition" nillable="true" type="tns:ArrayOfPaymentSetGroupDefinition" />
+      <xs:complexType name="PaymentSetGroupDefinition">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="Id" type="xs:int" />
+              <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="PaymentSets" nillable="true" type="tns:ArrayOfPaymentSetNameModel" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="PaymentSetGroupDefinition" nillable="true" type="tns:PaymentSetGroupDefinition" />
+      <xs:complexType name="ArrayOfPaymentSetNameModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PaymentSetNameModel" nillable="true" type="tns:PaymentSetNameModel" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfPaymentSetNameModel" nillable="true" type="tns:ArrayOfPaymentSetNameModel" />
+      <xs:complexType name="PaymentSetNameModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentSetDefId" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PaymentSetNameModel" nillable="true" type="tns:PaymentSetNameModel" />
+      <xs:complexType name="DeleteCreditCardResult">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:ResultBase">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:element name="DeleteCreditCardResult" nillable="true" type="tns:DeleteCreditCardResult" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:complexType name="ArrayOfInt32">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="int" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfInt32" nillable="true" type="tns:ArrayOfInt32" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:complexType name="Agent">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AgentId" type="xs:int" />
+          <xs:element minOccurs="0" name="AgentTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CurrencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DynamicDataCollection" nillable="true" type="tns:ArrayOfDynamicFieldCollection" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InsertDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsCompany" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentSetId" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentSetName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SubAgent" nillable="true" type="tns:Agent" />
+          <xs:element minOccurs="0" name="TCKN" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxOffice" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Agent" nillable="true" type="tns:Agent" />
+      <xs:complexType name="ArrayOfDynamicFieldCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DynamicFieldCollection" nillable="true" type="tns:DynamicFieldCollection" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDynamicFieldCollection" nillable="true" type="tns:ArrayOfDynamicFieldCollection" />
+      <xs:complexType name="DynamicFieldCollection">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IntegrationId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IntegrationValues" nillable="true" type="tns:ArrayOfIntegrationValue" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Values" nillable="true" type="tns:ArrayOfDynamicFieldValues" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DynamicFieldCollection" nillable="true" type="tns:DynamicFieldCollection" />
+      <xs:complexType name="ArrayOfDynamicFieldValues">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DynamicFieldValues" nillable="true" type="tns:DynamicFieldValues" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDynamicFieldValues" nillable="true" type="tns:ArrayOfDynamicFieldValues" />
+      <xs:complexType name="DynamicFieldValues">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Key" type="xs:int" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DynamicFieldValues" nillable="true" type="tns:DynamicFieldValues" />
+      <xs:complexType name="ArrayOfIntegrationValue">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="IntegrationValue" nillable="true" type="tns:IntegrationValue" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfIntegrationValue" nillable="true" type="tns:ArrayOfIntegrationValue" />
+      <xs:complexType name="IntegrationValue">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FieldId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="IntegrationValue" nillable="true" type="tns:IntegrationValue" />
+      <xs:complexType name="ArrayOfPaymentServiceModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PaymentServiceModel" nillable="true" type="tns:PaymentServiceModel" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfPaymentServiceModel" nillable="true" type="tns:ArrayOfPaymentServiceModel" />
+      <xs:complexType name="PaymentServiceModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccountErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Agent" nillable="true" type="tns:Agent" />
+          <xs:element minOccurs="0" name="AuthenticationNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankCommisionAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="BankCommissionRate" type="xs:decimal" />
+          <xs:element minOccurs="0" name="BankDetails" nillable="true" type="tns:BankDetails" />
+          <xs:element minOccurs="0" name="BankPaymentDays" type="xs:int" />
+          <xs:element minOccurs="0" name="BankPaymentModels" nillable="true" type="tns:ArrayOfBankPaymentModel" />
+          <xs:element minOccurs="0" name="BankPaymentPlan" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BonusText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardBrand" type="xs:int" />
+          <xs:element minOccurs="0" name="CardHolderEmail" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardHolderName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardHolderPhone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardHolderTCKN" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardLevel" type="xs:int" />
+          <xs:element minOccurs="0" name="CardNumberFirst6" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardNumberLast4" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CardType" type="xs:int" />
+          <xs:element minOccurs="0" name="ChequeAccountNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeBankName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeBranchName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeCityName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Cheques" nillable="true" type="tns:ArrayOfCheque" />
+          <xs:element minOccurs="0" name="ClientReferenceCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ComissionRate" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ComissionType" type="xs:int" />
+          <xs:element minOccurs="0" name="CurrencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CurrencyProccessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CurrencyProccessNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="DefaultPOSUsed" type="xs:boolean" />
+          <xs:element minOccurs="0" name="DocumentTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="DynamicDataCollection" nillable="true" type="tns:ArrayOfDynamicFieldCollection" />
+          <xs:element minOccurs="0" name="DynamicFields" nillable="true" type="tns:ArrayOfDynamicField" />
+          <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpFirmCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorGroupCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorGroupMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ExchangeRate" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ExpiryDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="GiftCardAmount" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="GiftCardLastAmount" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="GroupReference" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsMailOrderTransaction" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MailOrderSenderUser" nillable="true" type="tns:AgentUser" />
+          <xs:element minOccurs="0" name="PaidToAgent" nillable="true" type="tns:Agent" />
+          <xs:element minOccurs="0" name="PayLinkSendTypeId" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentAccountId" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentAccountTransactionId" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentAccountTransactions" nillable="true" type="tns:ArrayOfPaymentAccountTransaction" />
+          <xs:element minOccurs="0" name="PaymentDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="PaymentDeferral" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentId" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentInfo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentItems" nillable="true" type="tns:ArrayOfPaymentItem" />
+          <xs:element minOccurs="0" name="PaymentSetErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentSetId" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentSetName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentType" type="xs:int" />
+          <xs:element minOccurs="0" name="Period" type="xs:int" />
+          <xs:element minOccurs="0" name="PeriodCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PlusPeriod" type="xs:int" />
+          <xs:element minOccurs="0" name="ProccessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ProccessNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ProvisionNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReferenceCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReferenceNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Reversals" nillable="true" type="tns:ArrayOfReversalServiceModel" />
+          <xs:element minOccurs="0" name="SecondaryPerson" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SourceType" type="xs:int" />
+          <xs:element minOccurs="0" name="TaxOffice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxTcknNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TransactionStatusId" type="xs:int" />
+          <xs:element minOccurs="0" name="VPosApiName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VPosERPCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VPosId" type="xs:int" />
+          <xs:element minOccurs="0" name="VendorVPosName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VposCommRate" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PaymentServiceModel" nillable="true" type="tns:PaymentServiceModel" />
+      <xs:complexType name="ArrayOfReversalServiceModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ReversalServiceModel" nillable="true" type="tns:ReversalServiceModel" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfReversalServiceModel" nillable="true" type="tns:ArrayOfReversalServiceModel" />
+      <xs:complexType name="ReversalServiceModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccountErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Agent" nillable="true" type="tns:Agent" />
+          <xs:element minOccurs="0" name="CurrencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CurrencyProccessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CurrencyProccessNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpFirmCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="ExchangeRate" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Payment" nillable="true" type="tns:PaymentServiceModel" />
+          <xs:element minOccurs="0" name="ProccessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ProccessNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ReversalDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ReversalDesrcription" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ReversalId" type="xs:int" />
+          <xs:element minOccurs="0" name="ReversalItems" nillable="true" type="tns:ArrayOfReversalItem" />
+          <xs:element minOccurs="0" name="ReversalType" type="xs:int" />
+          <xs:element minOccurs="0" name="SourceType" type="xs:int" />
+          <xs:element minOccurs="0" name="VPosERPCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ReversalServiceModel" nillable="true" type="tns:ReversalServiceModel" />
+      <xs:complexType name="ArrayOfReversalItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ReversalItem" nillable="true" type="tns:ReversalItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfReversalItem" nillable="true" type="tns:ArrayOfReversalItem" />
+      <xs:complexType name="ReversalItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CurrencyProcessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CurrencyProcessNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="PaymentItemDefinitionId" type="xs:int" />
+          <xs:element minOccurs="0" name="ProcessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ProcessNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ReversalItemDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ReversalItemId" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ReversalItem" nillable="true" type="tns:ReversalItem" />
+      <xs:complexType name="ArrayOfDynamicField">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DynamicField" nillable="true" type="tns:DynamicField" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDynamicField" nillable="true" type="tns:ArrayOfDynamicField" />
+      <xs:complexType name="DynamicField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FormCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IntegrationId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IntegrationValues" nillable="true" type="tns:ArrayOfIntegrationValue" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DynamicField" nillable="true" type="tns:DynamicField" />
+      <xs:complexType name="ArrayOfPaymentAccountTransaction">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PaymentAccountTransaction" nillable="true" type="tns:PaymentAccountTransaction" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfPaymentAccountTransaction" nillable="true" type="tns:ArrayOfPaymentAccountTransaction" />
+      <xs:complexType name="PaymentAccountTransaction">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:double" />
+          <xs:element minOccurs="0" name="DepartmentCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DivisionCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DocumentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaidAmount" type="xs:double" />
+          <xs:element minOccurs="0" name="TransactionErpCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PaymentAccountTransaction" nillable="true" type="tns:PaymentAccountTransaction" />
+      <xs:complexType name="ArrayOfCheque">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Cheque" nillable="true" type="tns:Cheque" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfCheque" nillable="true" type="tns:ArrayOfCheque" />
+      <xs:complexType name="Cheque">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CheckOwner" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeAccountNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeBankCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeBankName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeBranchCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeBranchName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeCityName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ChequeNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DocumentType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ExpiryDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Guarantor" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InstallmentType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Status" type="xs:int" />
+          <xs:element minOccurs="0" name="TaxOffice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Tax_TCKN" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Cheque" nillable="true" type="tns:Cheque" />
+      <xs:complexType name="AgentUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsAdmin" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TCKN" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="AgentUser" nillable="true" type="tns:AgentUser" />
+      <xs:complexType name="ArrayOfPaymentItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="PaymentItem" nillable="true" type="tns:PaymentItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfPaymentItem" nillable="true" type="tns:ArrayOfPaymentItem" />
+      <xs:complexType name="PaymentItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CurrencyLastAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CurrencyLastNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CurrencyProcessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CurrencyProcessNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="LastAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="LastNetAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="PaymentItemDate" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentItemDefinitionId" type="xs:int" />
+          <xs:element minOccurs="0" name="PaymentItemDefinitionName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PaymentItemId" type="xs:int" />
+          <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ProcessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ProcessNetAmount" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PaymentItem" nillable="true" type="tns:PaymentItem" />
+      <xs:complexType name="ArrayOfBankPaymentModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="BankPaymentModel" nillable="true" type="tns:BankPaymentModel" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfBankPaymentModel" nillable="true" type="tns:ArrayOfBankPaymentModel" />
+      <xs:complexType name="BankPaymentModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ErpCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InstallmentCount" type="xs:int" />
+          <xs:element minOccurs="0" name="InstallmentDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="InstallmentNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="ProcessAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ProcessNetAmount" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="BankPaymentModel" nillable="true" type="tns:BankPaymentModel" />
+      <xs:complexType name="BankDetails">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BankVPosBankCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankVPosCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BankVPosName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="BankDetails" nillable="true" type="tns:BankDetails" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:complexType name="ArrayOfint">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="int" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfint" nillable="true" type="tns:ArrayOfint" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IVendorWebService_CreateVendor_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateVendor" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_CreateVendor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateVendorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_CreateVendorUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateVendorUser" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_CreateVendorUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateVendorUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_CreateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_CreateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_UpdateVendor_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateVendor" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_UpdateVendor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateVendorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_UpdateVendorUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateVendorUser" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_UpdateVendorUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateVendorUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_UpdateVendorUserByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateVendorUserByCode" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_UpdateVendorUserByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateVendorUserByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_UpdateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_UpdateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_CreateOrUpdateCurrentAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateCurrentAccount" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_CreateOrUpdateCurrentAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateCurrentAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_GetAgentByERPCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByERPCode" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_GetAgentByERPCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByERPCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_GetAgentByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByCode" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_GetAgentByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_GetPaymentsByAgent_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsByAgent" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_GetPaymentsByAgent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsByAgentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_GetPaymentSetGroupList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentSetGroupList" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_GetPaymentSetGroupList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentSetGroupListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_DeleteCreditCardByVendorCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCreditCardByVendorCode" />
+  </wsdl:message>
+  <wsdl:message name="IVendorWebService_DeleteCreditCardByVendorCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCreditCardByVendorCodeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IVendorWebService">
+    <wsdl:operation name="CreateVendor">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/CreateVendor" message="tns:IVendorWebService_CreateVendor_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/CreateVendorResponse" message="tns:IVendorWebService_CreateVendor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateVendorUser">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/CreateVendorUser" message="tns:IVendorWebService_CreateVendorUser_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/CreateVendorUserResponse" message="tns:IVendorWebService_CreateVendorUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCustomer">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/CreateCustomer" message="tns:IVendorWebService_CreateCustomer_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/CreateCustomerResponse" message="tns:IVendorWebService_CreateCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVendor">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/UpdateVendor" message="tns:IVendorWebService_UpdateVendor_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/UpdateVendorResponse" message="tns:IVendorWebService_UpdateVendor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVendorUser">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/UpdateVendorUser" message="tns:IVendorWebService_UpdateVendorUser_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/UpdateVendorUserResponse" message="tns:IVendorWebService_UpdateVendorUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVendorUserByCode">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/UpdateVendorUserByCode" message="tns:IVendorWebService_UpdateVendorUserByCode_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/UpdateVendorUserByCodeResponse" message="tns:IVendorWebService_UpdateVendorUserByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/UpdateCustomer" message="tns:IVendorWebService_UpdateCustomer_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/UpdateCustomerResponse" message="tns:IVendorWebService_UpdateCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrUpdateCurrentAccount">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/CreateOrUpdateCurrentAccount" message="tns:IVendorWebService_CreateOrUpdateCurrentAccount_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/CreateOrUpdateCurrentAccountResponse" message="tns:IVendorWebService_CreateOrUpdateCurrentAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByERPCode">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/GetAgentByERPCode" message="tns:IVendorWebService_GetAgentByERPCode_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/GetAgentByERPCodeResponse" message="tns:IVendorWebService_GetAgentByERPCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByCode">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/GetAgentByCode" message="tns:IVendorWebService_GetAgentByCode_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/GetAgentByCodeResponse" message="tns:IVendorWebService_GetAgentByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsByAgent">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/GetPaymentsByAgent" message="tns:IVendorWebService_GetPaymentsByAgent_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/GetPaymentsByAgentResponse" message="tns:IVendorWebService_GetPaymentsByAgent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentSetGroupList">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/GetPaymentSetGroupList" message="tns:IVendorWebService_GetPaymentSetGroupList_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/GetPaymentSetGroupListResponse" message="tns:IVendorWebService_GetPaymentSetGroupList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCreditCardByVendorCode">
+      <wsdl:input wsam:Action="http://tempuri.org/IVendorWebService/DeleteCreditCardByVendorCode" message="tns:IVendorWebService_DeleteCreditCardByVendorCode_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IVendorWebService/DeleteCreditCardByVendorCodeResponse" message="tns:IVendorWebService_DeleteCreditCardByVendorCode_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IVendorWebService" type="tns:IVendorWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateVendor">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/CreateVendor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateVendorUser">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/CreateVendorUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCustomer">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/CreateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVendor">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/UpdateVendor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVendorUser">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/UpdateVendorUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVendorUserByCode">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/UpdateVendorUserByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrUpdateCurrentAccount">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/CreateOrUpdateCurrentAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByERPCode">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/GetAgentByERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByCode">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/GetAgentByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsByAgent">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/GetPaymentsByAgent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentSetGroupList">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/GetPaymentSetGroupList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCreditCardByVendorCode">
+      <soap:operation soapAction="http://tempuri.org/IVendorWebService/DeleteCreditCardByVendorCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IVendorWebService">
+    <wsdl:port name="BasicHttpBinding_IVendorWebService" binding="tns:BasicHttpBinding_IVendorWebService">
+      <soap:address location="https://erpdemosrv.netahsilatservice.com/Vendorservice/VendorWebService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

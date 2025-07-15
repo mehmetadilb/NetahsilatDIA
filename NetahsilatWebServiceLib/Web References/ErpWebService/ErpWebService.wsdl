@@ -1,0 +1,1601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ErpWebService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpsBinding_IErpWebService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WinService.Integration" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.DTO" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd7" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.EMailOrder" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.Integration" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/PGWService.Models.WCF.Integration" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.VendorPaymentService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IErpWebService_GetNonIntegratedBankPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedBankPayment" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedBankPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedBankPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentsByVendorErpCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsByVendorErpCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentsByVendorErpCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsByVendorErpCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPayments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPayments" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPayments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentsByUserCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsByUserCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentsByUserCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsByUserCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedReversalsForLogo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedReversalsForLogo" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedReversalsForLogo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedReversalsForLogoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForLogo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForLogo" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForLogo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForLogoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetAgentByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetAgentByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForSAP_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForSAP" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForSAP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForSAPResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForSAPLittle_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForSAPLittle" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForSAPLittle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForSAPLittleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_InsertVendorSAPIntegration_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertVendorSAPIntegration" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_InsertVendorSAPIntegration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertVendorSAPIntegrationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetAgentByERPCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByERPCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetAgentByERPCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByERPCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetAgentById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentById" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetAgentById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAgentByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPayments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPayments" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPayments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedReversals_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedReversals" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedReversals_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedReversalsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentByReferenceCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentByReferenceCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentByReferenceCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentByReferenceCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentByClientReferenceCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentByClientReferenceCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentByClientReferenceCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentByClientReferenceCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentByTransactionId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentByTransactionId" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentByTransactionId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentByTransactionIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentItemDefinitionList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentItemDefinitionList" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentItemDefinitionList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentItemDefinitionListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetReversalByTransactionId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReversalByTransactionId" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetReversalByTransactionId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReversalByTransactionIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetReversals_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReversals" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetReversals_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReversalsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetVirtualPosList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualPosList" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetVirtualPosList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVirtualPosListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetAgentCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAgentCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetAgentCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAgentCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetAgentERPCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAgentERPCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetAgentERPCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAgentERPCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetPaymentERPCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaymentERPCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetPaymentERPCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaymentERPCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetReversalERPCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetReversalERPCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetReversalERPCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetReversalERPCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetPaymentAccountERPCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaymentAccountERPCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetPaymentAccountERPCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaymentAccountERPCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetPaymentAccountTransactionERPCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaymentAccountTransactionERPCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetPaymentAccountTransactionERPCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaymentAccountTransactionERPCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_BankPaymentSumsIntegrated_InputMessage">
+    <wsdl:part name="parameters" element="tns:BankPaymentSumsIntegrated" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_BankPaymentSumsIntegrated_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BankPaymentSumsIntegratedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetBankAccountTransactionById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankAccountTransactionById" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetBankAccountTransactionById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankAccountTransactionByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetBankAccountTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankAccountTransactions" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetBankAccountTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankAccountTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedBankAccountTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedBankAccountTransactions" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedBankAccountTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedBankAccountTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetUnsuccessTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUnsuccessTransactions" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetUnsuccessTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUnsuccessTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetBankAccountTransactionErpCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetBankAccountTransactionErpCode" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetBankAccountTransactionErpCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetBankAccountTransactionErpCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentsForTurkTraktor_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsForTurkTraktor" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentsForTurkTraktor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsForTurkTraktorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForTurkTraktor_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForTurkTraktor" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForTurkTraktor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForTurkTraktorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentsForCanias_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsForCanias" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetPaymentsForCanias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaymentsForCaniasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForCanias_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForCanias" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsForCanias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsForCaniasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetPaymentERPCodeForCanias_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaymentERPCodeForCanias" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetPaymentERPCodeForCanias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPaymentERPCodeForCaniasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedReversalsForCanias_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedReversalsForCanias" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedReversalsForCanias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedReversalsForCaniasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetReversalERPCodeForCanias_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetReversalERPCodeForCanias" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SetReversalERPCodeForCanias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetReversalERPCodeForCaniasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetBankPaymentById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankPaymentById" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetBankPaymentById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankPaymentByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetBankPaymentByOrderReference_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankPaymentByOrderReference" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetBankPaymentByOrderReference_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankPaymentByOrderReferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendEmailOrderFromWebService_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailOrderFromWebService" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendEmailOrderFromWebService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailOrderFromWebServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyPaymentsMail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyPaymentsMail" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyPaymentsMail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyPaymentsMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendWeeklyPaymentsMail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendWeeklyPaymentsMail" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendWeeklyPaymentsMail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendWeeklyPaymentsMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendPaymentsMail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendPaymentsMail" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendPaymentsMail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendPaymentsMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyPaymentsMailCron_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyPaymentsMailCron" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyPaymentsMailCron_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyPaymentsMailCronResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyInvoicePaymentsMail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyInvoicePaymentsMail" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyInvoicePaymentsMail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyInvoicePaymentsMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendWeeklyInvoicePaymentsMail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendWeeklyInvoicePaymentsMail" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendWeeklyInvoicePaymentsMail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendWeeklyInvoicePaymentsMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendInvoicePaymentsMail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendInvoicePaymentsMail" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendInvoicePaymentsMail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendInvoicePaymentsMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyInvoicePaymentsMailCron_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyInvoicePaymentsMailCron" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyInvoicePaymentsMailCron_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyInvoicePaymentsMailCronResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_AutoPasswordChange_InputMessage">
+    <wsdl:part name="parameters" element="tns:AutoPasswordChange" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_AutoPasswordChange_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AutoPasswordChangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsByProductMM_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsByProductMM" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_GetNonIntegratedPaymentsByProductMM_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNonIntegratedPaymentsByProductMMResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_FTPBankPaymentsReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:FTPBankPaymentsReport" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_FTPBankPaymentsReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FTPBankPaymentsReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyPaymentPercentMailCorn_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyPaymentPercentMailCorn" />
+  </wsdl:message>
+  <wsdl:message name="IErpWebService_SendDailyPaymentPercentMailCorn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendDailyPaymentPercentMailCornResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IErpWebService">
+    <wsdl:operation name="GetNonIntegratedBankPayment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedBankPayment" message="tns:IErpWebService_GetNonIntegratedBankPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedBankPaymentResponse" message="tns:IErpWebService_GetNonIntegratedBankPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsByVendorErpCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsByVendorErpCode" message="tns:IErpWebService_GetPaymentsByVendorErpCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsByVendorErpCodeResponse" message="tns:IErpWebService_GetPaymentsByVendorErpCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPayments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPayments" message="tns:IErpWebService_GetPayments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsResponse" message="tns:IErpWebService_GetPayments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsByUserCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsByUserCode" message="tns:IErpWebService_GetPaymentsByUserCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsByUserCodeResponse" message="tns:IErpWebService_GetPaymentsByUserCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversalsForLogo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsForLogo" message="tns:IErpWebService_GetNonIntegratedReversalsForLogo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsForLogoResponse" message="tns:IErpWebService_GetNonIntegratedReversalsForLogo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForLogo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForLogo" message="tns:IErpWebService_GetNonIntegratedPaymentsForLogo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForLogoResponse" message="tns:IErpWebService_GetNonIntegratedPaymentsForLogo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetAgentByCode" message="tns:IErpWebService_GetAgentByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetAgentByCodeResponse" message="tns:IErpWebService_GetAgentByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForSAP">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForSAP" message="tns:IErpWebService_GetNonIntegratedPaymentsForSAP_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForSAPResponse" message="tns:IErpWebService_GetNonIntegratedPaymentsForSAP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForSAPLittle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForSAPLittle" message="tns:IErpWebService_GetNonIntegratedPaymentsForSAPLittle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForSAPLittleResponse" message="tns:IErpWebService_GetNonIntegratedPaymentsForSAPLittle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertVendorSAPIntegration">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/InsertVendorSAPIntegration" message="tns:IErpWebService_InsertVendorSAPIntegration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/InsertVendorSAPIntegrationResponse" message="tns:IErpWebService_InsertVendorSAPIntegration_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByERPCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetAgentByERPCode" message="tns:IErpWebService_GetAgentByERPCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetAgentByERPCodeResponse" message="tns:IErpWebService_GetAgentByERPCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetAgentById" message="tns:IErpWebService_GetAgentById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetAgentByIdResponse" message="tns:IErpWebService_GetAgentById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPayments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPayments" message="tns:IErpWebService_GetNonIntegratedPayments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsResponse" message="tns:IErpWebService_GetNonIntegratedPayments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversals">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedReversals" message="tns:IErpWebService_GetNonIntegratedReversals_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsResponse" message="tns:IErpWebService_GetNonIntegratedReversals_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByReferenceCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentByReferenceCode" message="tns:IErpWebService_GetPaymentByReferenceCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentByReferenceCodeResponse" message="tns:IErpWebService_GetPaymentByReferenceCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByClientReferenceCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentByClientReferenceCode" message="tns:IErpWebService_GetPaymentByClientReferenceCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentByClientReferenceCodeResponse" message="tns:IErpWebService_GetPaymentByClientReferenceCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByTransactionId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentByTransactionId" message="tns:IErpWebService_GetPaymentByTransactionId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentByTransactionIdResponse" message="tns:IErpWebService_GetPaymentByTransactionId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentItemDefinitionList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentItemDefinitionList" message="tns:IErpWebService_GetPaymentItemDefinitionList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentItemDefinitionListResponse" message="tns:IErpWebService_GetPaymentItemDefinitionList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReversalByTransactionId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetReversalByTransactionId" message="tns:IErpWebService_GetReversalByTransactionId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetReversalByTransactionIdResponse" message="tns:IErpWebService_GetReversalByTransactionId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReversals">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetReversals" message="tns:IErpWebService_GetReversals_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetReversalsResponse" message="tns:IErpWebService_GetReversals_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetVirtualPosList" message="tns:IErpWebService_GetVirtualPosList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetVirtualPosListResponse" message="tns:IErpWebService_GetVirtualPosList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAgentCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetAgentCode" message="tns:IErpWebService_SetAgentCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetAgentCodeResponse" message="tns:IErpWebService_SetAgentCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAgentERPCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetAgentERPCode" message="tns:IErpWebService_SetAgentERPCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetAgentERPCodeResponse" message="tns:IErpWebService_SetAgentERPCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentERPCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetPaymentERPCode" message="tns:IErpWebService_SetPaymentERPCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetPaymentERPCodeResponse" message="tns:IErpWebService_SetPaymentERPCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetReversalERPCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetReversalERPCode" message="tns:IErpWebService_SetReversalERPCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetReversalERPCodeResponse" message="tns:IErpWebService_SetReversalERPCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentAccountERPCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetPaymentAccountERPCode" message="tns:IErpWebService_SetPaymentAccountERPCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetPaymentAccountERPCodeResponse" message="tns:IErpWebService_SetPaymentAccountERPCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentAccountTransactionERPCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetPaymentAccountTransactionERPCode" message="tns:IErpWebService_SetPaymentAccountTransactionERPCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetPaymentAccountTransactionERPCodeResponse" message="tns:IErpWebService_SetPaymentAccountTransactionERPCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BankPaymentSumsIntegrated">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/BankPaymentSumsIntegrated" message="tns:IErpWebService_BankPaymentSumsIntegrated_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/BankPaymentSumsIntegratedResponse" message="tns:IErpWebService_BankPaymentSumsIntegrated_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBankAccountTransactionById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetBankAccountTransactionById" message="tns:IErpWebService_GetBankAccountTransactionById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetBankAccountTransactionByIdResponse" message="tns:IErpWebService_GetBankAccountTransactionById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBankAccountTransactions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetBankAccountTransactions" message="tns:IErpWebService_GetBankAccountTransactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetBankAccountTransactionsResponse" message="tns:IErpWebService_GetBankAccountTransactions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedBankAccountTransactions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedBankAccountTransactions" message="tns:IErpWebService_GetNonIntegratedBankAccountTransactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedBankAccountTransactionsResponse" message="tns:IErpWebService_GetNonIntegratedBankAccountTransactions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUnsuccessTransactions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetUnsuccessTransactions" message="tns:IErpWebService_GetUnsuccessTransactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetUnsuccessTransactionsResponse" message="tns:IErpWebService_GetUnsuccessTransactions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetBankAccountTransactionErpCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetBankAccountTransactionErpCode" message="tns:IErpWebService_SetBankAccountTransactionErpCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetBankAccountTransactionErpCodeResponse" message="tns:IErpWebService_SetBankAccountTransactionErpCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsForTurkTraktor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsForTurkTraktor" message="tns:IErpWebService_GetPaymentsForTurkTraktor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsForTurkTraktorResponse" message="tns:IErpWebService_GetPaymentsForTurkTraktor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForTurkTraktor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForTurkTraktor" message="tns:IErpWebService_GetNonIntegratedPaymentsForTurkTraktor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForTurkTraktorResponse" message="tns:IErpWebService_GetNonIntegratedPaymentsForTurkTraktor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsForCanias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsForCanias" message="tns:IErpWebService_GetPaymentsForCanias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetPaymentsForCaniasResponse" message="tns:IErpWebService_GetPaymentsForCanias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForCanias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForCanias" message="tns:IErpWebService_GetNonIntegratedPaymentsForCanias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForCaniasResponse" message="tns:IErpWebService_GetNonIntegratedPaymentsForCanias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentERPCodeForCanias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetPaymentERPCodeForCanias" message="tns:IErpWebService_SetPaymentERPCodeForCanias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetPaymentERPCodeForCaniasResponse" message="tns:IErpWebService_SetPaymentERPCodeForCanias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversalsForCanias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsForCanias" message="tns:IErpWebService_GetNonIntegratedReversalsForCanias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsForCaniasResponse" message="tns:IErpWebService_GetNonIntegratedReversalsForCanias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetReversalERPCodeForCanias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SetReversalERPCodeForCanias" message="tns:IErpWebService_SetReversalERPCodeForCanias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SetReversalERPCodeForCaniasResponse" message="tns:IErpWebService_SetReversalERPCodeForCanias_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBankPaymentById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetBankPaymentById" message="tns:IErpWebService_GetBankPaymentById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetBankPaymentByIdResponse" message="tns:IErpWebService_GetBankPaymentById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBankPaymentByOrderReference">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetBankPaymentByOrderReference" message="tns:IErpWebService_GetBankPaymentByOrderReference_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetBankPaymentByOrderReferenceResponse" message="tns:IErpWebService_GetBankPaymentByOrderReference_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailOrderFromWebService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendEmailOrderFromWebService" message="tns:IErpWebService_SendEmailOrderFromWebService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendEmailOrderFromWebServiceResponse" message="tns:IErpWebService_SendEmailOrderFromWebService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentsMail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendDailyPaymentsMail" message="tns:IErpWebService_SendDailyPaymentsMail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendDailyPaymentsMailResponse" message="tns:IErpWebService_SendDailyPaymentsMail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendWeeklyPaymentsMail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendWeeklyPaymentsMail" message="tns:IErpWebService_SendWeeklyPaymentsMail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendWeeklyPaymentsMailResponse" message="tns:IErpWebService_SendWeeklyPaymentsMail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPaymentsMail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendPaymentsMail" message="tns:IErpWebService_SendPaymentsMail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendPaymentsMailResponse" message="tns:IErpWebService_SendPaymentsMail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentsMailCron">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendDailyPaymentsMailCron" message="tns:IErpWebService_SendDailyPaymentsMailCron_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendDailyPaymentsMailCronResponse" message="tns:IErpWebService_SendDailyPaymentsMailCron_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyInvoicePaymentsMail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendDailyInvoicePaymentsMail" message="tns:IErpWebService_SendDailyInvoicePaymentsMail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendDailyInvoicePaymentsMailResponse" message="tns:IErpWebService_SendDailyInvoicePaymentsMail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendWeeklyInvoicePaymentsMail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendWeeklyInvoicePaymentsMail" message="tns:IErpWebService_SendWeeklyInvoicePaymentsMail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendWeeklyInvoicePaymentsMailResponse" message="tns:IErpWebService_SendWeeklyInvoicePaymentsMail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendInvoicePaymentsMail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendInvoicePaymentsMail" message="tns:IErpWebService_SendInvoicePaymentsMail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendInvoicePaymentsMailResponse" message="tns:IErpWebService_SendInvoicePaymentsMail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyInvoicePaymentsMailCron">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendDailyInvoicePaymentsMailCron" message="tns:IErpWebService_SendDailyInvoicePaymentsMailCron_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendDailyInvoicePaymentsMailCronResponse" message="tns:IErpWebService_SendDailyInvoicePaymentsMailCron_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AutoPasswordChange">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/AutoPasswordChange" message="tns:IErpWebService_AutoPasswordChange_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/AutoPasswordChangeResponse" message="tns:IErpWebService_AutoPasswordChange_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsByProductMM">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsByProductMM" message="tns:IErpWebService_GetNonIntegratedPaymentsByProductMM_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsByProductMMResponse" message="tns:IErpWebService_GetNonIntegratedPaymentsByProductMM_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FTPBankPaymentsReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/FTPBankPaymentsReport" message="tns:IErpWebService_FTPBankPaymentsReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/FTPBankPaymentsReportResponse" message="tns:IErpWebService_FTPBankPaymentsReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentPercentMailCorn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IErpWebService/SendDailyPaymentPercentMailCorn" message="tns:IErpWebService_SendDailyPaymentPercentMailCorn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IErpWebService/SendDailyPaymentPercentMailCornResponse" message="tns:IErpWebService_SendDailyPaymentPercentMailCorn_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IErpWebService" type="tns:IErpWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNonIntegratedBankPayment">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedBankPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsByVendorErpCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentsByVendorErpCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPayments">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPayments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsByUserCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentsByUserCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversalsForLogo">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsForLogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForLogo">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForLogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetAgentByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForSAP">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForSAP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForSAPLittle">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForSAPLittle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertVendorSAPIntegration">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/InsertVendorSAPIntegration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetAgentByERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentById">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetAgentById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPayments">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPayments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversals">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedReversals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByReferenceCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentByReferenceCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByClientReferenceCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentByClientReferenceCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByTransactionId">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentByTransactionId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentItemDefinitionList">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentItemDefinitionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReversalByTransactionId">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetReversalByTransactionId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReversals">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetReversals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosList">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetVirtualPosList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAgentCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetAgentCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAgentERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetAgentERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetPaymentERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReversalERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetReversalERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentAccountERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetPaymentAccountERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentAccountTransactionERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetPaymentAccountTransactionERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BankPaymentSumsIntegrated">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/BankPaymentSumsIntegrated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankAccountTransactionById">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetBankAccountTransactionById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankAccountTransactions">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetBankAccountTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedBankAccountTransactions">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedBankAccountTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnsuccessTransactions">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetUnsuccessTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBankAccountTransactionErpCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetBankAccountTransactionErpCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsForTurkTraktor">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentsForTurkTraktor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForTurkTraktor">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForTurkTraktor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentsForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentERPCodeForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetPaymentERPCodeForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversalsForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReversalERPCodeForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetReversalERPCodeForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankPaymentById">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetBankPaymentById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankPaymentByOrderReference">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetBankPaymentByOrderReference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailOrderFromWebService">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendEmailOrderFromWebService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyPaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendWeeklyPaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendWeeklyPaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendPaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentsMailCron">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyPaymentsMailCron" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyInvoicePaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyInvoicePaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendWeeklyInvoicePaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendWeeklyInvoicePaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendInvoicePaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendInvoicePaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyInvoicePaymentsMailCron">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyInvoicePaymentsMailCron" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AutoPasswordChange">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/AutoPasswordChange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsByProductMM">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsByProductMM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FTPBankPaymentsReport">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/FTPBankPaymentsReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentPercentMailCorn">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyPaymentPercentMailCorn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpsBinding_IErpWebService" type="tns:IErpWebService">
+    <wsp:PolicyReference URI="#BasicHttpsBinding_IErpWebService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNonIntegratedBankPayment">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedBankPayment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsByVendorErpCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentsByVendorErpCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPayments">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPayments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsByUserCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentsByUserCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversalsForLogo">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsForLogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForLogo">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForLogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetAgentByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForSAP">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForSAP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForSAPLittle">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForSAPLittle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertVendorSAPIntegration">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/InsertVendorSAPIntegration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentByERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetAgentByERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAgentById">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetAgentById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPayments">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPayments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversals">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedReversals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByReferenceCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentByReferenceCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByClientReferenceCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentByClientReferenceCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentByTransactionId">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentByTransactionId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentItemDefinitionList">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentItemDefinitionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReversalByTransactionId">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetReversalByTransactionId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReversals">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetReversals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVirtualPosList">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetVirtualPosList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAgentCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetAgentCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAgentERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetAgentERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetPaymentERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReversalERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetReversalERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentAccountERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetPaymentAccountERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentAccountTransactionERPCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetPaymentAccountTransactionERPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BankPaymentSumsIntegrated">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/BankPaymentSumsIntegrated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankAccountTransactionById">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetBankAccountTransactionById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankAccountTransactions">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetBankAccountTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedBankAccountTransactions">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedBankAccountTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUnsuccessTransactions">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetUnsuccessTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBankAccountTransactionErpCode">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetBankAccountTransactionErpCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsForTurkTraktor">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentsForTurkTraktor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForTurkTraktor">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForTurkTraktor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentsForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetPaymentsForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPaymentERPCodeForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetPaymentERPCodeForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedReversalsForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedReversalsForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReversalERPCodeForCanias">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SetReversalERPCodeForCanias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankPaymentById">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetBankPaymentById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankPaymentByOrderReference">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetBankPaymentByOrderReference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailOrderFromWebService">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendEmailOrderFromWebService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyPaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendWeeklyPaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendWeeklyPaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendPaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentsMailCron">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyPaymentsMailCron" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyInvoicePaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyInvoicePaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendWeeklyInvoicePaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendWeeklyInvoicePaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendInvoicePaymentsMail">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendInvoicePaymentsMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyInvoicePaymentsMailCron">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyInvoicePaymentsMailCron" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AutoPasswordChange">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/AutoPasswordChange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNonIntegratedPaymentsByProductMM">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/GetNonIntegratedPaymentsByProductMM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FTPBankPaymentsReport">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/FTPBankPaymentsReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDailyPaymentPercentMailCorn">
+      <soap:operation soapAction="http://tempuri.org/IErpWebService/SendDailyPaymentPercentMailCorn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ErpWebService">
+    <wsdl:port name="BasicHttpBinding_IErpWebService" binding="tns:BasicHttpBinding_IErpWebService">
+      <soap:address location="http://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpsBinding_IErpWebService" binding="tns:BasicHttpsBinding_IErpWebService">
+      <soap:address location="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

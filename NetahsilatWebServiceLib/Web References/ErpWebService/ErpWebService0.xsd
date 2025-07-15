@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.DTO" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd7" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/PGWService.Models.WCF.Integration" />
+  <xs:element name="GetNonIntegratedBankPayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q1:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedBankPaymentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedBankPaymentResult" nillable="true" type="q2:BankPaymentListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsByVendorErpCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q3:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="vendorErpCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsByVendorErpCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentsByVendorErpCodeResult" nillable="true" type="q4:PaymentServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPayments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q5:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="integrationStatus" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentsResult" nillable="true" type="q6:PaymentServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsByUserCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q7:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="integrationStatus" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsByUserCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentsByUserCodeResult" nillable="true" type="q8:PaymentServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedReversalsForLogo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q9:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedReversalsForLogoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedReversalsForLogoResult" nillable="true" type="q10:ErpNonIntegratedReversalResultModelForLogo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForLogo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q11:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForLogoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedPaymentsForLogoResult" nillable="true" type="q12:ErpNonIntegratedPaymentResultModelForLogo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAgentByCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q13:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="agentCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAgentByCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetAgentByCodeResult" nillable="true" type="q14:AgentResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForSAP">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q15:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="getValidPaymentsOnly" nillable="true" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForSAPResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedPaymentsForSAPResult" nillable="true" type="q16:PaymentServiceModelListResultForSAP" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForSAPLittle">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q17:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="getValidPaymentsOnly" nillable="true" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForSAPLittleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedPaymentsForSAPLittleResult" nillable="true" type="q18:PaymentServiceModelListResultForSAPLittle" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertVendorSAPIntegration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q19:AuthenticationInfo" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.DTO" minOccurs="0" name="vendor" nillable="true" type="q20:SAPVendorDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertVendorSAPIntegrationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="InsertVendorSAPIntegrationResult" nillable="true" type="q21:UserServiceModelResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAgentByERPCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q22:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAgentByERPCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetAgentByERPCodeResult" nillable="true" type="q23:AgentResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAgentById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q24:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="agentId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAgentByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetAgentByIdResult" nillable="true" type="q25:AgentResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPayments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q26:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedPaymentsResult" nillable="true" type="q27:PaymentServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedReversals">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q28:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedReversalsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedReversalsResult" nillable="true" type="q29:ReversalServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentByReferenceCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q30:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="referenceCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentByReferenceCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentByReferenceCodeResult" nillable="true" type="q31:PaymentServiceModelResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentByClientReferenceCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q32:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="clientReferenceCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentByClientReferenceCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentByClientReferenceCodeResult" nillable="true" type="q33:PaymentServiceModelResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentByTransactionId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q34:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentByTransactionIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentByTransactionIdResult" nillable="true" type="q35:PaymentServiceModelResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentItemDefinitionList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q36:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentItemDefinitionListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentItemDefinitionListResult" nillable="true" type="q37:PaymentItemDefinitionListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReversalByTransactionId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q38:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReversalByTransactionIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetReversalByTransactionIdResult" nillable="true" type="q39:ReversalServiceModelResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReversals">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q40:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="integrationStatus" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetReversalsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetReversalsResult" nillable="true" type="q41:ReversalServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVirtualPosList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q42:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVirtualPosListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetVirtualPosListResult" nillable="true" type="q43:VirtualPosListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetAgentCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q44:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="agentId" type="xs:int" />
+        <xs:element minOccurs="0" name="vendorCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetAgentCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetAgentCodeResult" nillable="true" type="q45:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetAgentERPCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q46:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="agentId" type="xs:int" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetAgentERPCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetAgentERPCodeResult" nillable="true" type="q47:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPaymentERPCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q48:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="erpErrorMessage" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPaymentERPCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetPaymentERPCodeResult" nillable="true" type="q49:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetReversalERPCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q50:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="erpErrorMessage" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetReversalERPCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetReversalERPCodeResult" nillable="true" type="q51:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPaymentAccountERPCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q52:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="transactionAccountId" type="xs:int" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPaymentAccountERPCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetPaymentAccountERPCodeResult" nillable="true" type="q53:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPaymentAccountTransactionERPCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q54:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="transactionAccountTransactionId" type="xs:int" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPaymentAccountTransactionERPCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetPaymentAccountTransactionERPCodeResult" nillable="true" type="q55:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BankPaymentSumsIntegrated">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q56:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BankPaymentSumsIntegratedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="BankPaymentSumsIntegratedResult" nillable="true" type="q57:BankPaymentsResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankAccountTransactionById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q58:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankAccountTransactionByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetBankAccountTransactionByIdResult" nillable="true" type="q59:BankAccountTransactionResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankAccountTransactions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q60:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="integrationStatus" type="xs:int" />
+        <xs:element xmlns:q61="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="vPosApiIdList" nillable="true" type="q61:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankAccountTransactionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetBankAccountTransactionsResult" nillable="true" type="q62:BankAccountTransactionListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedBankAccountTransactions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q63:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedBankAccountTransactionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedBankAccountTransactionsResult" nillable="true" type="q64:BankAccountTransactionListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUnsuccessTransactions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q65:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUnsuccessTransactionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetUnsuccessTransactionsResult" nillable="true" type="q66:BankAccountTransactionListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetBankAccountTransactionErpCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q67:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="transferErrorStatus" nillable="true" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetBankAccountTransactionErpCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetBankAccountTransactionErpCodeResult" nillable="true" type="q68:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsForTurkTraktor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q69:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="integrationStatus" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsForTurkTraktorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentsForTurkTraktorResult" nillable="true" type="q70:PaymentServiceModelListResultForTurkTraktor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForTurkTraktor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q71:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForTurkTraktorResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedPaymentsForTurkTraktorResult" nillable="true" type="q72:PaymentServiceModelListResultForTurkTraktor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsForCanias">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="integrationStatus" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaymentsForCaniasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetPaymentsForCaniasResult" nillable="true" type="q73:PaymentServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForCanias">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userPwd" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsForCaniasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedPaymentsForCaniasResult" nillable="true" type="q74:PaymentServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPaymentERPCodeForCanias">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetPaymentERPCodeForCaniasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetPaymentERPCodeForCaniasResult" nillable="true" type="q75:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedReversalsForCanias">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userPwd" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedReversalsForCaniasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedReversalsForCaniasResult" nillable="true" type="q76:ReversalServiceModelListResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetReversalERPCodeForCanias">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="erpCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetReversalERPCodeForCaniasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SetReversalERPCodeForCaniasResult" nillable="true" type="q77:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankPaymentById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q78:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="paymentId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankPaymentByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetBankPaymentByIdResult" nillable="true" type="q79:VPosTransactionDetailBankPaymentResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankPaymentByOrderReference">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q80:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="orderReference" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBankPaymentByOrderReferenceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetBankPaymentByOrderReferenceResult" nillable="true" type="q81:VPosTransactionDetailBankPaymentResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailOrderFromWebService">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q82:AuthenticationInfo" />
+        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="sendMailOrderParameter" nillable="true" type="q83:SendMailOrderParameter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailOrderFromWebServiceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="SendEmailOrderFromWebServiceResult" nillable="true" type="q84:EmailOrderERPWebServiceResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyPaymentsMail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q85:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyPaymentsMailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendDailyPaymentsMailResult" nillable="true" type="q86:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendWeeklyPaymentsMail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q87:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendWeeklyPaymentsMailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendWeeklyPaymentsMailResult" nillable="true" type="q88:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendPaymentsMail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q89:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendPaymentsMailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendPaymentsMailResult" nillable="true" type="q90:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyPaymentsMailCron">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parameters" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyPaymentsMailCronResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendDailyPaymentsMailCronResult" nillable="true" type="q91:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyInvoicePaymentsMail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q92:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyInvoicePaymentsMailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendDailyInvoicePaymentsMailResult" nillable="true" type="q93:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendWeeklyInvoicePaymentsMail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q94="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q94:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendWeeklyInvoicePaymentsMailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendWeeklyInvoicePaymentsMailResult" nillable="true" type="q95:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendInvoicePaymentsMail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q96="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q96:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendInvoicePaymentsMailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q97="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendInvoicePaymentsMailResult" nillable="true" type="q97:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyInvoicePaymentsMailCron">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parameters" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyInvoicePaymentsMailCronResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q98="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendDailyInvoicePaymentsMailCronResult" nillable="true" type="q98:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AutoPasswordChange">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q99:AuthenticationInfo" />
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newPassword" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AutoPasswordChangeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q100="http://schemas.datacontract.org/2004/07/PGWService.Models.WCF.Integration" minOccurs="0" name="AutoPasswordChangeResult" nillable="true" type="q100:PasswordChangeResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsByProductMM">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="authInfo" nillable="true" type="q101:AuthenticationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNonIntegratedPaymentsByProductMMResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q102="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" minOccurs="0" name="GetNonIntegratedPaymentsByProductMMResult" nillable="true" type="q102:PaymentModelListResultByProduct" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FTPBankPaymentsReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parameters" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FTPBankPaymentsReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q103="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="FTPBankPaymentsReportResult" nillable="true" type="q103:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyPaymentPercentMailCorn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parameters" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendDailyPaymentPercentMailCornResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q104="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" minOccurs="0" name="SendDailyPaymentPercentMailCornResult" nillable="true" type="q104:ResultBase" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

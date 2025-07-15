@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="CurrentAccountTransaction" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpsBinding_ICurrentAccountTransaction_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.PaymentWebService.Models" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.IntegrationModels" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.ErpWebService.Model" />
+      <xsd:import schemaLocation="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.Enums" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICurrentAccountTransaction_CreateOrUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_CreateOrUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_DeleteALL_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteALL" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_DeleteALL_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteALLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_BankPaymentSumsIntegrated_InputMessage">
+    <wsdl:part name="parameters" element="tns:BankPaymentSumsIntegrated" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_BankPaymentSumsIntegrated_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BankPaymentSumsIntegratedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_DeleteByDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteByDate" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_DeleteByDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_DeleteByDateCron_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteByDateCron" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_DeleteByDateCron_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteByDateCronResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_UpdateMaxInstallment_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMaxInstallment" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_UpdateMaxInstallment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMaxInstallmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_SendCATDebtInfoMail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendCATDebtInfoMail" />
+  </wsdl:message>
+  <wsdl:message name="ICurrentAccountTransaction_SendCATDebtInfoMail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendCATDebtInfoMailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICurrentAccountTransaction">
+    <wsdl:operation name="CreateOrUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/CreateOrUpdate" message="tns:ICurrentAccountTransaction_CreateOrUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/CreateOrUpdateResponse" message="tns:ICurrentAccountTransaction_CreateOrUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/Delete" message="tns:ICurrentAccountTransaction_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/DeleteResponse" message="tns:ICurrentAccountTransaction_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteALL">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/DeleteALL" message="tns:ICurrentAccountTransaction_DeleteALL_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/DeleteALLResponse" message="tns:ICurrentAccountTransaction_DeleteALL_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/Get" message="tns:ICurrentAccountTransaction_Get_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/GetResponse" message="tns:ICurrentAccountTransaction_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BankPaymentSumsIntegrated">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/BankPaymentSumsIntegrated" message="tns:ICurrentAccountTransaction_BankPaymentSumsIntegrated_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/BankPaymentSumsIntegratedResponse" message="tns:ICurrentAccountTransaction_BankPaymentSumsIntegrated_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/DeleteByDate" message="tns:ICurrentAccountTransaction_DeleteByDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/DeleteByDateResponse" message="tns:ICurrentAccountTransaction_DeleteByDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByDateCron">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/DeleteByDateCron" message="tns:ICurrentAccountTransaction_DeleteByDateCron_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/DeleteByDateCronResponse" message="tns:ICurrentAccountTransaction_DeleteByDateCron_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMaxInstallment">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/UpdateMaxInstallment" message="tns:ICurrentAccountTransaction_UpdateMaxInstallment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/UpdateMaxInstallmentResponse" message="tns:ICurrentAccountTransaction_UpdateMaxInstallment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendCATDebtInfoMail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/SendCATDebtInfoMail" message="tns:ICurrentAccountTransaction_SendCATDebtInfoMail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICurrentAccountTransaction/SendCATDebtInfoMailResponse" message="tns:ICurrentAccountTransaction_SendCATDebtInfoMail_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICurrentAccountTransaction" type="tns:ICurrentAccountTransaction">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateOrUpdate">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/CreateOrUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteALL">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/DeleteALL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BankPaymentSumsIntegrated">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/BankPaymentSumsIntegrated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByDate">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/DeleteByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByDateCron">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/DeleteByDateCron" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMaxInstallment">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/UpdateMaxInstallment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCATDebtInfoMail">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/SendCATDebtInfoMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpsBinding_ICurrentAccountTransaction" type="tns:ICurrentAccountTransaction">
+    <wsp:PolicyReference URI="#BasicHttpsBinding_ICurrentAccountTransaction_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateOrUpdate">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/CreateOrUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteALL">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/DeleteALL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BankPaymentSumsIntegrated">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/BankPaymentSumsIntegrated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByDate">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/DeleteByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteByDateCron">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/DeleteByDateCron" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMaxInstallment">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/UpdateMaxInstallment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendCATDebtInfoMail">
+      <soap:operation soapAction="http://tempuri.org/ICurrentAccountTransaction/SendCATDebtInfoMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CurrentAccountTransaction">
+    <wsdl:port name="BasicHttpBinding_ICurrentAccountTransaction" binding="tns:BasicHttpBinding_ICurrentAccountTransaction">
+      <soap:address location="http://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpsBinding_ICurrentAccountTransaction" binding="tns:BasicHttpsBinding_ICurrentAccountTransaction">
+      <soap:address location="https://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NetahsilatWebServiceLib.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NetahsilatWebServiceLib_ErpWebService_ErpWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc</Value>
+    </Setting>
+    <Setting Name="NetahsilatWebServiceLib_CurrentAccountTransactionService_CurrentAccountTransaction" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://erpdemosrv.netahsilatservice.com/CAT/CurrentAccountTransaction.svc</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

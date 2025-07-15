@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.EMailOrder" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.EMailOrder" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfCustomDataModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomDataModel" nillable="true" type="tns:CustomDataModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomDataModel" nillable="true" type="tns:ArrayOfCustomDataModel" />
+  <xs:complexType name="CustomDataModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FormCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IntegrationId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomDataModel" nillable="true" type="tns:CustomDataModel" />
+  <xs:complexType name="ArrayOfEmailOrderUserModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EmailOrderUserModel" nillable="true" type="tns:EmailOrderUserModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEmailOrderUserModel" nillable="true" type="tns:ArrayOfEmailOrderUserModel" />
+  <xs:complexType name="EmailOrderUserModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EMail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Key" type="ser:guid" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmailOrderUserModel" nillable="true" type="tns:EmailOrderUserModel" />
+  <xs:simpleType name="MailOrderStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="Fail" />
+      <xs:enumeration value="Pending">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RequestSend">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TimeOut">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MaxFail">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TransactionCancel">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MailOrderStatus" nillable="true" type="tns:MailOrderStatus" />
+</xs:schema>

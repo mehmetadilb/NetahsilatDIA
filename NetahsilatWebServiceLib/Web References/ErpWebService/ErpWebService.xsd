@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.Integration" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.WCF.Integration" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://erpdemosrv.netahsilatservice.com/ERP/ErpWebService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.EMailOrder" />
+  <xs:complexType name="ArrayOfEmailOrderResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EmailOrderResult" nillable="true" type="tns:EmailOrderResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEmailOrderResult" nillable="true" type="tns:ArrayOfEmailOrderResult" />
+  <xs:complexType name="EmailOrderResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SendDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SenderId" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/NetahsilatGold.Domain.Model.EMailOrder" minOccurs="0" name="Status" type="q1:MailOrderStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmailOrderResult" nillable="true" type="tns:EmailOrderResult" />
+</xs:schema>
