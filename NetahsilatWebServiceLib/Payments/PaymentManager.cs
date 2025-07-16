@@ -64,6 +64,8 @@ namespace NetahsilatWebServiceLib.Payments
             {
                 PaymentServiceModelListResult payments = _erpWebService.GetNonIntegratedPayments(_authenticationInfo);
 
+
+
                 if (payments.IsSuccess)
                 {
                     GetPayment(payments, posList);
@@ -194,6 +196,8 @@ namespace NetahsilatWebServiceLib.Payments
             {
                 // Batch veri yükleme - tüm payment'lar için ortak verileri önceden yükle
                 var payments = pymListResult.Payments.ToList();
+
+
                 _batchDataManager.PreloadBatchDataAsync(payments, posList).Wait();
 
                 // Her payment'ı işle
@@ -700,17 +704,18 @@ namespace NetahsilatWebServiceLib.Payments
         {
             dynamic model = new ExpandoObject();
 
+
             model._key_scf_malzeme_baglantisi = 0;
             model._key_scf_odeme_plani = 0;
             model._key_sis_ozelkod = 0;
             model._key_sis_seviyekodu = 0;
             model._key_sis_sube = new ExpandoObject();
-            model._key_sis_sube.subekodu = "";
+            model._key_sis_sube.subekodu = 0;
             model.aciklama1 = creditCardFicheParameters.DescriptionModel.PublicDescriptionModel;
             model.aciklama2 = "";
             model.aciklama3 = "";
             model.belgeno = "";
-            model.fisno = creditCardFicheParameters.Payment.ErpCode;
+            model.fisno = creditCardFicheParameters.VoucherNumber;
 
             dynamic kalem = new ExpandoObject();
             kalem._key_bcs_bankahesabi = 0;

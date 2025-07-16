@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enum\CommissionTransferType.cs" />
+    <Compile Include="Enum\DiaCurrenyType.cs" />
     <Compile Include="Enum\LogType.cs" />
     <Compile Include="Enum\TransactionType.cs" />
     <Compile Include="Enum\EnumExtensions.cs" />

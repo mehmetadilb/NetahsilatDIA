@@ -15,6 +15,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.ComponentModel.DataAnnotations;
 
 namespace NetahsilatWebServiceLib.Accounts
 {
@@ -541,7 +542,7 @@ namespace NetahsilatWebServiceLib.Accounts
                                 {
                                     ErpCode = currentAccount.Code,
                                     Description = "",
-                                    Name = currentAccount.FirmName,
+                                    Name = currentAccount.Title,
                                     VendorErpCode = customerData.ErpCode,
                                     PaymentSetDefinitionId = paymentSetId,
                                     CurrencyCodes = new int[] { customerData.CurrencyTypeId },
@@ -608,8 +609,8 @@ namespace NetahsilatWebServiceLib.Accounts
                 IsActive = true,
                 Mobile = customerData.Mobile,
                 PassportNumber = customerData.PassportNumber,
-                Password = "net_" + customerData.Code,
-                SendMail = Config.GlobalParameters.GlobalSettings.SEND_EMAIL,
+                Password = !string.IsNullOrEmpty(customerData.Password) ? "net_" + customerData.Code : null,
+                SendMail = customerData.SendMail,
                 TCKN = customerData.TCKN
             };
 
@@ -660,6 +661,9 @@ namespace NetahsilatWebServiceLib.Accounts
                 ? $"{erpCode}@temp.com"
                 : customer.MailAddress;
 
+
+
+
             return new CustomerData
             {
                 Code = erpCode,
@@ -670,16 +674,16 @@ namespace NetahsilatWebServiceLib.Accounts
                 TaxNumber = taxnumber.Length > 0 ? taxnumber : null,
                 TaxOffice = customer.TaxOffice,
                 Address = customer.Address,
-                CurrencyTypeId = 1,
+                CurrencyTypeId = (int)EnumExtensions.GetValueFromDisplayName<DiaCurrenyType>(customer.CurrencyType),
                 ParentCode = "",
                 ParentUserEmail = "",
                 Phone = customer.PhoneNumber.Length > 0 ? customer.PhoneNumber : "2121111111",
                 FirstName = customer.Title,
                 LastName = "-",
-                Mobile = customer.MobilePhoneNumber.Length > 0 ? customer.MobilePhoneNumber : "5321111111",
-                Password = "1234",
+                Mobile = !string.IsNullOrWhiteSpace(customer.MobilePhoneNumber) && customer.MobilePhoneNumber.Length >= 10 ? customer.MobilePhoneNumber.Substring(customer.MobilePhoneNumber.Length - 10) : "5321111111",
+                Password = customer.IntegrationStatus ? null : "1234",
                 TCKN = tckn,
-                SendMail = Config.GlobalParameters.GlobalSettings.SEND_EMAIL,
+                SendMail = customer.IntegrationStatus ? false : Config.GlobalParameters.GlobalSettings.SEND_EMAIL,
                 CityCode = customer.City.ToString(),
                 CountryCodeISO = "TR",
                 IsCompany = isCompany,

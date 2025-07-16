@@ -144,6 +144,12 @@ namespace CommonLib.Model
         public long PeriodNumber { get; set; }
 
         /// <summary>
+        /// Para Birimi
+        /// </summary>
+        [JsonProperty("anadovizi")]
+        public string CurrencyType { get; set; }
+
+        /// <summary>
         /// Aktarım Durumu
         /// </summary>
         public bool IntegrationStatus { get; set; }
