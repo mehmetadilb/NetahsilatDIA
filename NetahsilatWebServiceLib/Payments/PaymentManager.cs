@@ -153,7 +153,7 @@ namespace NetahsilatWebServiceLib.Payments
                     if (paymentResult.Payment.TransactionStatusId == (int)PaymentSuccessStatus.Failed)
                         throw new Exception(referenceNumber + " referans no lu ödeme başarısız olarak gerçekleşmiştir. Başarısız ödemenin aktarımı yapılamaz!");
 
-                    return InsertPayment(paymentResult.Payment, posList);
+                    return InsertPayment(paymentResult.Payment, posList, forceReloadIfMissing: true);
                 }
                 else
                 {
@@ -230,7 +230,7 @@ namespace NetahsilatWebServiceLib.Payments
             return successCount;
         }
 
-        private bool InsertPayment(PaymentServiceModel payment, VirtualPosListResult posList)
+        private bool InsertPayment(PaymentServiceModel payment, VirtualPosListResult posList, bool forceReloadIfMissing = false)
         {
             string voucherNumber = payment.ErpCode;
             bool isSuccess = true;
@@ -286,6 +286,11 @@ namespace NetahsilatWebServiceLib.Payments
                 if (!String.IsNullOrEmpty(dynamicFieldValues.Salesman))
                 {
                     var salesmanModel = _batchDataManager.GetSalesman(dynamicFieldValues.Salesman);
+                    if (salesmanModel == null && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadDynamicFieldsByEndpointAsync(new List<string> { dynamicFieldValues.Salesman }, DiaEndPoints.Keys.SALESMAN).Wait();
+                        salesmanModel = _batchDataManager.GetSalesman(dynamicFieldValues.Salesman);
+                    }
                     if (salesmanModel == null)
                     {
                         Logging.AddLog($"'{dynamicFieldValues.Salesman}' kodlu satış elemanı DİA'da bulunamadı.");
@@ -296,6 +301,11 @@ namespace NetahsilatWebServiceLib.Payments
                 if (!String.IsNullOrEmpty(dynamicFieldValues.AuthCode))
                 {
                     var authCode = _batchDataManager.GetAuthCode(dynamicFieldValues.AuthCode);
+                    if (authCode == null && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadDynamicFieldsByEndpointAsync(new List<string> { dynamicFieldValues.AuthCode }, DiaEndPoints.Keys.AUTHKEY).Wait();
+                        authCode = _batchDataManager.GetAuthCode(dynamicFieldValues.AuthCode);
+                    }
                     if (authCode == null)
                     {
                         Logging.AddLog($"'{dynamicFieldValues.AuthCode}' kodlu yetki DİA'da bulunamadı.");
@@ -306,6 +316,11 @@ namespace NetahsilatWebServiceLib.Payments
                 if (!String.IsNullOrEmpty(dynamicFieldValues.ProjectCode))
                 {
                     var project = _batchDataManager.GetProjectCode(dynamicFieldValues.ProjectCode);
+                    if (project == null && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadDynamicFieldsByEndpointAsync(new List<string> { dynamicFieldValues.ProjectCode }, DiaEndPoints.Keys.PROJECTCODE).Wait();
+                        project = _batchDataManager.GetProjectCode(dynamicFieldValues.ProjectCode);
+                    }
                     if (project == null)
                     {
                         Logging.AddLog($"'{dynamicFieldValues.ProjectCode}' kodlu proje kodu DİA'da bulunamadı.");
@@ -346,7 +361,11 @@ namespace NetahsilatWebServiceLib.Payments
                 {
                     var customerAccountCode = ServiceHelper.GetCustomerCodeFromPayment(payment);
                     var customerAccount = GetCustomer(payment.AccountErpCode, payment.Agent);
-
+                    if (customerAccount == null && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadCustomersAsync(new List<string> { payment.AccountErpCode }).Wait();
+                        customerAccount = GetCustomer(payment.AccountErpCode, payment.Agent);
+                    }
                     if (customerAccount == null)
                     {
                         throw new Exception($"{payment.PaymentId} id'li ödemeye ait DİAda kayıtlı cari bulunamadığı için aktarımı yapılmadı. Cari Kod: {customerAccountCode} Ödeme Id: {payment.PaymentId}");
@@ -355,10 +374,12 @@ namespace NetahsilatWebServiceLib.Payments
                     var opponentCustomerCode = payment.BankDetails?.BankVPosCode ?? string.Empty;
 
                     var opponentCustomer = _batchDataManager.GetCustomerByCode(opponentCustomerCode);
-
-                    //var opponentCustomer = _paymentRepository.GetCustomerByErpCode(opponentCustomerCode);
-
-                    if (opponentCustomer == null)
+                    if (opponentCustomer == null && !string.IsNullOrEmpty(opponentCustomerCode) && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadCustomersAsync(new List<string> { opponentCustomerCode }).Wait();
+                        opponentCustomer = _batchDataManager.GetCustomerByCode(opponentCustomerCode);
+                    }
+                    if (opponentCustomer == null && !string.IsNullOrEmpty(opponentCustomerCode))
                     {
                         throw new Exception($"{opponentCustomerCode} kodlu karşı cari hesap kaydı DİA'da bulunamadı.");
                     }
@@ -370,7 +391,8 @@ namespace NetahsilatWebServiceLib.Payments
                         Customer = customerAccount,
                         OpponentCustomer = opponentCustomer,
                         DynamicFields = dynamicFieldValues,
-                        DescriptionModel = descriptionModel
+                        DescriptionModel = descriptionModel,
+                        ForceReloadIfMissing = forceReloadIfMissing
                     };
 
                     CreateVirmanFiche(customerVirmanFicheParameters);
@@ -379,8 +401,12 @@ namespace NetahsilatWebServiceLib.Payments
                 {
                     if (String.IsNullOrWhiteSpace(payment.VPosERPCode))
                         Logging.AddLog($"Ödeme içerisinde banka hesap kodu bulunamadı! Alan adı: VPosERPCode");
-
                     var bankAccount = _batchDataManager.GetBankAccount(payment.VPosERPCode);
+                    if ((bankAccount == null || bankAccount == 0) && !string.IsNullOrEmpty(payment.VPosERPCode) && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadBankAccountsAsync(new List<string> { payment.VPosERPCode }).Wait();
+                        bankAccount = _batchDataManager.GetBankAccount(payment.VPosERPCode);
+                    }
                     if (bankAccount == null || bankAccount == 0)
                         throw new Exception($"DİA veritabanında banka hesabı bulunamadı! Banka Hesap Kodu: {payment.VPosERPCode}");
 
@@ -399,7 +425,7 @@ namespace NetahsilatWebServiceLib.Payments
                             if (customer == null)
                                 throw new Exception($"Torba hesaba ait cari bulunamadı için aktarım yapılamadı. Torba Hesap No: {Config.GlobalParameters.GlobalSettings.NONCUSTOMER_BAGACCOUNT}");
 
-                            CreateCreditCardFiche(payment, payment.VPosERPCode, customer, bankAccount.Value, rePayPlanCode, dynamicFields: dynamicFieldValues, descriptionModel: descriptionModel, voucherNumber: voucherNumber);
+                            CreateCreditCardFiche(payment, payment.VPosERPCode, customer, bankAccount.Value, rePayPlanCode, dynamicFields: dynamicFieldValues, descriptionModel: descriptionModel, voucherNumber: voucherNumber, forceReloadIfMissing: forceReloadIfMissing);
 
                             Logging.AddLog($"Kredi kartı fişi '{Config.GlobalParameters.GlobalSettings.NONCUSTOMER_PAYMENT_TYPE}' torba hesabına aktarıldı.");
                         }
@@ -420,7 +446,7 @@ namespace NetahsilatWebServiceLib.Payments
                         //Ödemeden gelen sanal PosId sine göre posList dizimizden Pos ' un Erp Kodu alınır.
                         string vPosErpCode = ServiceHelper.GetVposErpCodeByPosId(payment.VPosId, posList);
 
-                        CreateCreditCardFiche(payment, vPosErpCode, currentAccount, bankAccount.Value, rePayPlanCode, voucherNumber, dynamicFieldValues, descriptionModel);
+                        CreateCreditCardFiche(payment, vPosErpCode, currentAccount, bankAccount.Value, rePayPlanCode, voucherNumber, dynamicFieldValues, descriptionModel, forceReloadIfMissing);
                     }
                 }
             }
@@ -463,7 +489,7 @@ namespace NetahsilatWebServiceLib.Payments
             return totalComission;
         }
 
-        private void CreateCreditCardFiche(PaymentServiceModel payment, string vPosErpCode, CurrentAccountModel customer, long bankAccountKey, string rePayPlanCode = "", string voucherNumber = null, DynamicFieldsModel dynamicFields = null, DescriptionModel descriptionModel = null)
+        private void CreateCreditCardFiche(PaymentServiceModel payment, string vPosErpCode, CurrentAccountModel customer, long bankAccountKey, string rePayPlanCode = "", string voucherNumber = null, DynamicFieldsModel dynamicFields = null, DescriptionModel descriptionModel = null, bool forceReloadIfMissing = false)
         {
             var paymentBackPlan = new BankPaymentBackPlan();
 
@@ -525,43 +551,45 @@ namespace NetahsilatWebServiceLib.Payments
             {
                 try
                 {
-                    // Firma bilgisini cache'den al
+                    // Firma bilgisi ve döviz kurları kontrolü
                     var firmInfoModelObj = _batchDataManager.GetFirmInfo();
-                    if (firmInfoModelObj == null)
+                    var exchangeRates = _batchDataManager.GetExchangeRates();
+                    if ((firmInfoModelObj == null || exchangeRates == null) && forceReloadIfMissing)
                     {
-                        throw new Exception("Firma bilgisi cache'den alınamadı.");
+                        _batchDataManager.ForceReloadFirmInfoAndExchangeRates();
+                        firmInfoModelObj = _batchDataManager.GetFirmInfo();
+                        exchangeRates = _batchDataManager.GetExchangeRates();
                     }
+                    if (firmInfoModelObj == null)
+                        throw new Exception("Firma bilgisi cache'den alınamadı.");
+                    if (exchangeRates == null)
+                        throw new Exception("Döviz kurları cache'den alınamadı.");
 
-                    string jsonString = JsonConvert.SerializeObject(firmInfoModelObj);
-                    var firmInfoModel = JsonConvert.DeserializeObject<DiaFirmInfoModel>(jsonString);
-
-                    var diaBranch = GetBranchKeyValueModel(dynamicFields.DivisionCode, firmInfoModel.Branches);
+                    // Branch seçimi mantığı (CreateCreditCardFiche'deki gibi)
+                    var diaBranch = GetBranchKeyValueModel(dynamicFields.DivisionCode, firmInfoModelObj.Branches);
 
                     if (diaBranch != null)
                     {
-                        var selectedBranch = firmInfoModel.Branches.FirstOrDefault(b => b.Id == diaBranch.Key);
+                        var branches = firmInfoModelObj.Branches as List<FirmBranchModel>;
+                        if (branches != null)
+                        {
+                            var selectedBranch = branches.FirstOrDefault(b => b.Id == diaBranch.Key);
 
-                        if (selectedBranch != null)
-                        {
-                            firmInfoModel.Branches = new List<FirmBranchModel> { selectedBranch };
-                        }
-                        else
-                        {
-                            firmInfoModel.Branches = new List<FirmBranchModel>();
+                            if (selectedBranch != null)
+                            {
+                                firmInfoModelObj.Branches = new List<FirmBranchModel> { selectedBranch };
+                            }
+                            else
+                            {
+                                firmInfoModelObj.Branches = new List<FirmBranchModel>();
+                            }
                         }
                     }
 
                     // Döviz kurlarını cache'den al
-                    var exchangeRates = _batchDataManager.GetExchangeRates();
-                    if (exchangeRates == null)
-                    {
-                        Logging.AddLog("Döviz kurları cache'den alınamadı, varsayılan değerler kullanılacak.");
-                        exchangeRates = new List<DiaExchangeModel>();
-                    }
-
                     DiaCurrencyParameterModel reportExchangeModel = null;
 
-                    var reportingCurrency = exchangeRates?.FirstOrDefault(x => x.CurrencyId == firmInfoModel.ReportCurrency.Id);
+                    var reportingCurrency = exchangeRates?.FirstOrDefault(x => x.CurrencyId == firmInfoModelObj.ReportCurrency.Id);
 
                     if (reportingCurrency != null && reportingCurrency.Rate > 0)
                     {
@@ -569,7 +597,7 @@ namespace NetahsilatWebServiceLib.Payments
                         {
                             Amount = payment.ProccessAmount,
                             Rate = (decimal)reportingCurrency.Rate,
-                            CurrencyType = firmInfoModel.ReportCurrency.Code
+                            CurrencyType = firmInfoModelObj.ReportCurrency.Code
                         };
                     }
 
@@ -612,7 +640,7 @@ namespace NetahsilatWebServiceLib.Payments
                         CurrencyModel = currencyModel,
                         PaymentCommissionType = payment.ComissionType,
                         DescriptionModel = descriptionModel,
-                        FirmInfoModel = firmInfoModel
+                        FirmInfoModel = firmInfoModelObj
                     };
 
                     var postParams = new BaseApiRequestParams();
@@ -704,14 +732,18 @@ namespace NetahsilatWebServiceLib.Payments
         {
             dynamic model = new ExpandoObject();
 
-
             model._key_scf_malzeme_baglantisi = 0;
             model._key_scf_odeme_plani = 0;
             model._key_sis_ozelkod = 0;
             model._key_sis_seviyekodu = 0;
-            model._key_sis_sube = new ExpandoObject();
-            model._key_sis_sube.subekodu = 0;
-            model.aciklama1 = creditCardFicheParameters.DescriptionModel.PublicDescriptionModel;
+            if(creditCardFicheParameters.FirmInfoModel.Branches.Count > 0)
+            {
+                model._key_sis_sube = new ExpandoObject();
+                model._key_sis_sube.subekodu = creditCardFicheParameters.FirmInfoModel.Branches[0].Code;
+            }
+            else
+                model._key_sis_sube = 0;
+            model.aciklama1 = creditCardFicheParameters.DescriptionModel.PublicDescriptionModel.Description1 ?? "";
             model.aciklama2 = "";
             model.aciklama3 = "";
             model.belgeno = "";
@@ -722,53 +754,62 @@ namespace NetahsilatWebServiceLib.Payments
             kalem._key_muh_masrafmerkezi = 0;
             kalem._key_ote_rezervasyonkarti = 0;
             kalem._key_prj_proje = 0;
-            kalem._key_scf_banka_odeme_plani = new ExpandoObject();
-            kalem._key_scf_banka_odeme_plani.kodu = 0;
+            if (!string.IsNullOrEmpty(creditCardFicheParameters.RePaymentPlanCode))
+            {
+                kalem._key_scf_banka_odeme_plani = new ExpandoObject();
+                kalem._key_scf_banka_odeme_plani.kodu = creditCardFicheParameters.RePaymentPlanCode;
+            }
+            else
+                kalem._key_scf_banka_odeme_plani = 0;
             kalem._key_scf_carikart = new ExpandoObject();
             kalem._key_scf_carikart.carikartkodu = creditCardFicheParameters.Customer.Id;
             kalem._key_scf_odeme_plani = 0;
             kalem._key_scf_satiselemani = 0;
             kalem._key_shy_servisformu = 0;
             kalem._key_sis_doviz = new ExpandoObject();
-            kalem._key_sis_doviz.adi = "TL";
+            kalem._key_sis_doviz.adi = creditCardFicheParameters.Payment.CurrencyCode ?? "TL";
             kalem._key_sis_doviz_raporlama = new ExpandoObject();
-            kalem._key_sis_doviz_raporlama.adi = "TL";
+            kalem._key_sis_doviz_raporlama.adi = creditCardFicheParameters.FirmInfoModel.ReportCurrency.Code;
             kalem._key_sis_ozelkod = 0;
-            kalem.aciklama = "";
+            kalem.aciklama = creditCardFicheParameters.DescriptionModel.LineDescription ?? "";
             kalem.alacak = creditCardFicheParameters.Payment.ProccessAmount;
-            kalem.dovizkuru = 1;
+            kalem.dovizkuru = creditCardFicheParameters.CurrencyModel.ExchangeRate;
             kalem.kurfarkialacak = "0.00";
             kalem.kurfarkiborc = "0.00";
-            kalem.raporlamadovizkuru = 1;
-            kalem.vade = creditCardFicheParameters.Payment.PaymentDate;
+            kalem.raporlamadovizkuru = creditCardFicheParameters.CurrencyModel.ReportRate;
+            kalem.vade = creditCardFicheParameters.Payment.PaymentDate.ToString("yyyy-MM-dd");
 
             model.m_kalemler = new List<dynamic> { kalem };
-
 
             dynamic kalem2 = new ExpandoObject();
             kalem2._key_bcs_bankahesabi = 0;
             kalem2._key_muh_masrafmerkezi = 0;
             kalem2._key_ote_rezervasyonkarti = 0;
             kalem2._key_prj_proje = 0;
-            kalem2._key_scf_banka_odeme_plani = new ExpandoObject();
-            kalem2._key_scf_banka_odeme_plani.kodu = 0;
+            if (!string.IsNullOrEmpty(creditCardFicheParameters.RePaymentPlanCode))
+            {
+                kalem2._key_scf_banka_odeme_plani = new ExpandoObject();
+                kalem2._key_scf_banka_odeme_plani.kodu = creditCardFicheParameters.RePaymentPlanCode;
+            }
+            else
+                kalem2._key_scf_banka_odeme_plani = 0;
             kalem2._key_scf_carikart = new ExpandoObject();
             kalem2._key_scf_carikart.carikartkodu = creditCardFicheParameters.OpponentCustomer.Id;
             kalem2._key_scf_odeme_plani = 0;
             kalem2._key_scf_satiselemani = 0;
             kalem2._key_shy_servisformu = 0;
             kalem2._key_sis_doviz = new ExpandoObject();
-            kalem2._key_sis_doviz.adi = "TL";
+            kalem2._key_sis_doviz.adi = creditCardFicheParameters.Payment.CurrencyCode ?? "TL";
             kalem2._key_sis_doviz_raporlama = new ExpandoObject();
-            kalem2._key_sis_doviz_raporlama.adi = "TL";
+            kalem2._key_sis_doviz_raporlama.adi = creditCardFicheParameters.FirmInfoModel.ReportCurrency.Code;
             kalem2._key_sis_ozelkod = 0;
-            kalem2.aciklama = "";
+            kalem2.aciklama = creditCardFicheParameters.DescriptionModel.LineDescription ?? "";
             kalem2.borc = creditCardFicheParameters.Payment.ProccessAmount;
-            kalem2.dovizkuru = 1;
+            kalem2.dovizkuru = creditCardFicheParameters.CurrencyModel.ExchangeRate;
             kalem2.kurfarkialacak = "0.00";
             kalem2.kurfarkiborc = "0.00";
-            kalem2.raporlamadovizkuru = 1;
-            kalem2.vade = creditCardFicheParameters.Payment.PaymentDate;
+            kalem2.raporlamadovizkuru = creditCardFicheParameters.CurrencyModel.ReportRate;
+            kalem2.vade = creditCardFicheParameters.Payment.PaymentDate.ToString("yyyy-MM-dd");
             model.m_kalemler.Add(kalem2);
 
             model.saat = creditCardFicheParameters.Payment.PaymentDate.ToString("HH:mm:ss");
@@ -782,6 +823,87 @@ namespace NetahsilatWebServiceLib.Payments
         {
             try
             {
+                // Firma bilgisi ve döviz kurları kontrolü
+                var firmInfoModelObj = _batchDataManager.GetFirmInfo();
+                var exchangeRates = _batchDataManager.GetExchangeRates();
+                if ((firmInfoModelObj == null || exchangeRates == null) && parameters.ForceReloadIfMissing)
+                {
+                    _batchDataManager.ForceReloadFirmInfoAndExchangeRates();
+                    firmInfoModelObj = _batchDataManager.GetFirmInfo();
+                    exchangeRates = _batchDataManager.GetExchangeRates();
+                }
+                if (firmInfoModelObj == null)
+                    throw new Exception("Firma bilgisi cache'den alınamadı.");
+                if (exchangeRates == null)
+                    throw new Exception("Döviz kurları cache'den alınamadı.");
+
+                // Branch seçimi mantığı (CreateCreditCardFiche'deki gibi)
+                var diaBranch = GetBranchKeyValueModel(parameters.DynamicFields.DivisionCode, firmInfoModelObj.Branches);
+
+                if (diaBranch != null)
+                {
+                    var branches = firmInfoModelObj.Branches as List<FirmBranchModel>;
+                    if (branches != null)
+                    {
+                        var selectedBranch = branches.FirstOrDefault(b => b.Id == diaBranch.Key);
+
+                        if (selectedBranch != null)
+                        {
+                            firmInfoModelObj.Branches = new List<FirmBranchModel> { selectedBranch };
+                        }
+                        else
+                        {
+                            firmInfoModelObj.Branches = new List<FirmBranchModel>();
+                        }
+                    }
+                }
+
+                // Döviz kurlarını cache'den al
+                DiaCurrencyParameterModel reportExchangeModel = null;
+
+                var reportingCurrency = exchangeRates?.FirstOrDefault(x => x.CurrencyId == firmInfoModelObj.ReportCurrency.Id);
+
+                if (reportingCurrency != null && reportingCurrency.Rate > 0)
+                {
+                    reportExchangeModel = new DiaCurrencyParameterModel
+                    {
+                        Amount = parameters.Payment.ProccessAmount,
+                        Rate = (decimal)reportingCurrency.Rate,
+                        CurrencyType = firmInfoModelObj.ReportCurrency.Code
+                    };
+                }
+
+                var currencyModel = new CurrencyModel()
+                {
+                    PureAmount = parameters.Payment.ProccessAmount,
+                    NetAmount = parameters.Payment.ProccessNetAmount,
+                    PureExchangeAmount = parameters.Payment.CurrencyProccessAmount,
+                    NetExchangeAmount = parameters.Payment.CurrencyProccessNetAmount,
+                    PureReportAmount = 0,
+                    NetReportAmount = 0,
+                    ReportRate = 0,
+                    ExchangeRate = parameters.Payment.ExchangeRate,
+                    CurrencyType = parameters.Payment.CurrencyCode
+                };
+
+                if (reportingCurrency != null && reportingCurrency.Rate > 0 && parameters.Payment.CurrencyCode != CurrencyCode.TRY.ToString())
+                {
+                    currencyModel.ReportRate = reportingCurrency.Rate;
+                    currencyModel.PureReportAmount = parameters.Payment.ProccessAmount / reportingCurrency.Rate;
+                    currencyModel.NetReportAmount = parameters.Payment.ProccessNetAmount / reportingCurrency.Rate;
+                }
+                else
+                { //işlem dövizliyse ve döviz türü ile raporla döviz türü tutuyorsa raporlama dövizine ödemedeki değerleri işlenir.
+                    currencyModel.ReportRate = parameters.Payment.ExchangeRate;
+                    currencyModel.PureReportAmount = parameters.Payment.ProccessAmount;
+                    currencyModel.NetReportAmount = parameters.Payment.ProccessNetAmount;
+                }
+
+                // CustomerVirmanFicheParameters'i güncelle
+                parameters.FirmInfoModel = firmInfoModelObj;
+                parameters.CurrencyModel = currencyModel;
+                parameters.RePaymentPlanCode = parameters.RePaymentPlanCode ?? string.Empty;
+
                 var _params = new BaseApiRequestParams();
                 _params.Kart = CreateCustomerVirmanFiche(parameters);
                 int logicalRef = DIARepository.Post(DiaEndPoints.Keys.CURRENTACCOUNTFICHE, _params).Result;
@@ -862,7 +984,7 @@ namespace NetahsilatWebServiceLib.Payments
             return 0;
         }
 
-        public bool InsertReversal(ReversalServiceModel reversal, VirtualPosListResult posList)
+        public bool InsertReversal(ReversalServiceModel reversal, VirtualPosListResult posList, bool forceReloadIfMissing = false)
         {
             var voucherNumber = reversal.ErpCode;
             bool isSuccess = true;
@@ -899,10 +1021,14 @@ namespace NetahsilatWebServiceLib.Payments
 
                 var dynamicFieldValues = DynamicValuesHelper.GetAllDynamicFieldValues(reversal);
 
-                // BatchDataManager'dan verileri al
                 if (!String.IsNullOrEmpty(dynamicFieldValues.Salesman))
                 {
                     var salesmanModel = _batchDataManager.GetSalesman(dynamicFieldValues.Salesman);
+                    if (salesmanModel == null && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadDynamicFieldsByEndpointAsync(new List<string> { dynamicFieldValues.Salesman }, DiaEndPoints.Keys.SALESMAN).Wait();
+                        salesmanModel = _batchDataManager.GetSalesman(dynamicFieldValues.Salesman);
+                    }
                     if (salesmanModel == null)
                     {
                         Logging.AddLog($"'{dynamicFieldValues.Salesman}' kodlu satış elemanı DİA'da bulunamadı.");
@@ -913,6 +1039,11 @@ namespace NetahsilatWebServiceLib.Payments
                 if (!String.IsNullOrEmpty(dynamicFieldValues.AuthCode))
                 {
                     var authCode = _batchDataManager.GetAuthCode(dynamicFieldValues.AuthCode);
+                    if (authCode == null && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadDynamicFieldsByEndpointAsync(new List<string> { dynamicFieldValues.AuthCode }, DiaEndPoints.Keys.AUTHKEY).Wait();
+                        authCode = _batchDataManager.GetAuthCode(dynamicFieldValues.AuthCode);
+                    }
                     if (authCode == null)
                     {
                         Logging.AddLog($"'{dynamicFieldValues.AuthCode}' kodlu yetki DİA'da bulunamadı.");
@@ -923,6 +1054,11 @@ namespace NetahsilatWebServiceLib.Payments
                 if (!String.IsNullOrEmpty(dynamicFieldValues.ProjectCode))
                 {
                     var project = _batchDataManager.GetProjectCode(dynamicFieldValues.ProjectCode);
+                    if (project == null && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadDynamicFieldsByEndpointAsync(new List<string> { dynamicFieldValues.ProjectCode }, DiaEndPoints.Keys.PROJECTCODE).Wait();
+                        project = _batchDataManager.GetProjectCode(dynamicFieldValues.ProjectCode);
+                    }
                     if (project == null)
                     {
                         Logging.AddLog($"'{dynamicFieldValues.ProjectCode}' kodlu proje kodu DİA'da bulunamadı.");
@@ -974,14 +1110,22 @@ namespace NetahsilatWebServiceLib.Payments
                     else if (Config.GlobalParameters.GlobalSettings.NONCUSTOMER_PAYMENT_TYPE == NonCustomerPayment.UseBagAccount)
                     {
                         var customer = _batchDataManager.GetCustomerByCode(Config.GlobalParameters.GlobalSettings.NONCUSTOMER_BAGACCOUNT);
-
+                        if (customer == null && forceReloadIfMissing)
+                        {
+                            _batchDataManager.ForceReloadCustomersAsync(new List<string> { Config.GlobalParameters.GlobalSettings.NONCUSTOMER_BAGACCOUNT }).Wait();
+                            customer = _batchDataManager.GetCustomerByCode(Config.GlobalParameters.GlobalSettings.NONCUSTOMER_BAGACCOUNT);
+                        }
                         if (customer == null)
                             throw new Exception($"Torba hesaba ait cari bulunamadı için aktarım yapılamadı. Torba Hesap No: {Config.GlobalParameters.GlobalSettings.NONCUSTOMER_BAGACCOUNT}");
-
+                        if (bankAccount == null && forceReloadIfMissing)
+                        {
+                            _batchDataManager.ForceReloadBankAccountsAsync(new List<string> { reversal.VPosERPCode }).Wait();
+                            bankAccount = _batchDataManager.GetBankAccount(reversal.VPosERPCode);
+                        }
                         if (bankAccount == null)
                             throw new Exception($"DİA veritabanında banka hesabı bulunamadı! Banka Hesap Kodu: {reversal.VPosERPCode}");
 
-                        CreateCreditCardFiche(reversal.Payment, reversal.VPosERPCode, customer, bankAccount.Value, rePayPlanCode, dynamicFields: dynamicFieldValues, descriptionModel: descriptionModel, voucherNumber: voucherNumber);
+                        CreateCreditCardFiche(reversal.Payment, reversal.VPosERPCode, customer, bankAccount.Value, rePayPlanCode, dynamicFields: dynamicFieldValues, descriptionModel: descriptionModel, voucherNumber: voucherNumber, forceReloadIfMissing: forceReloadIfMissing);
 
                         Logging.AddLog($"Kredi kartı fişi '{Config.GlobalParameters.GlobalSettings.NONCUSTOMER_PAYMENT_TYPE}' torba hesabına aktarıldı.");
                     }
@@ -989,22 +1133,22 @@ namespace NetahsilatWebServiceLib.Payments
                 else
                 {
                     var currentAccount = _batchDataManager.GetCustomer(reversal.AccountErpCode, reversal.Agent);
-
-                    if (currentAccount == null || String.IsNullOrEmpty(currentAccount.Code))
+                    if ((currentAccount == null || String.IsNullOrEmpty(currentAccount.Code)) && forceReloadIfMissing)
                     {
-                        throw new Exception($"Cari bilgisi DİA veritabanında bulunamadı! Cari Kod: {reversal.AccountErpCode}");
+                        _batchDataManager.ForceReloadCustomersAsync(new List<string> { reversal.AccountErpCode }).Wait();
+                        currentAccount = _batchDataManager.GetCustomer(reversal.AccountErpCode, reversal.Agent);
                     }
-
-                    //Ödeme yapılana sanal posun tipini alırız. Netahsilat posu ise Virman fişi kesilecek.
-                    int vposApiTypeId = ServiceHelper.GetVPosApiTypeIdByPosId(reversal.Payment.VPosId, posList);
-
-                    //Ödemeden gelen sanal PosId sine göre posList dizimizden Pos ' un Erp Kodu alınır.
-                    string vPosErpCode = ServiceHelper.GetVposErpCodeByPosId(reversal.Payment.VPosId, posList);
-
+                    if (currentAccount == null || String.IsNullOrEmpty(currentAccount.Code))
+                        throw new Exception($"Cari bilgisi DİA veritabanında bulunamadı! Cari Kod: {reversal.AccountErpCode}");
+                    if (bankAccount == null && forceReloadIfMissing)
+                    {
+                        _batchDataManager.ForceReloadBankAccountsAsync(new List<string> { reversal.VPosERPCode }).Wait();
+                        bankAccount = _batchDataManager.GetBankAccount(reversal.VPosERPCode);
+                    }
                     if (bankAccount == null)
                         throw new Exception($"DİA veritabanında banka hesabı bulunamadı! Banka Hesap Kodu: {reversal.VPosERPCode}");
 
-                    CreateCreditCardFiche(reversal.Payment, vPosErpCode, currentAccount, bankAccount.Value, rePayPlanCode, voucherNumber, dynamicFieldValues, descriptionModel);
+                    CreateCreditCardFiche(reversal.Payment, reversal.VPosERPCode, currentAccount, bankAccount.Value, rePayPlanCode, voucherNumber, dynamicFieldValues, descriptionModel, forceReloadIfMissing);
                 }
             }
             catch (Exception ex)

@@ -16,5 +16,9 @@ namespace NetahsilatWebServiceLib.Models
         public string VoucherNumber { get; set; }
         public DynamicFieldsModel DynamicFields { get; set; }
         public DescriptionModel DescriptionModel { get; set; }
+        public DiaFirmInfoModel FirmInfoModel { get; set; }
+        public CurrencyModel CurrencyModel { get; set; }
+        public string RePaymentPlanCode { get; set; }
+        public bool ForceReloadIfMissing { get; set; }
     }
 }

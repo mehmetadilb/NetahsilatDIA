@@ -577,5 +577,40 @@ namespace NetahsilatWebServiceLib.Common
             _bankAccountCacheLastUpdate = DateTime.MinValue;
             _dynamicFieldCacheLastUpdate = DateTime.MinValue;
         }
+        /// <summary>
+        /// Cache süresi kontrolü olmadan müşteri cache'ini zorla günceller
+        /// </summary>
+        public async Task ForceReloadCustomersAsync(List<string> customerCodes)
+        {
+            _customerCacheLastUpdate = DateTime.MinValue.AddYears(1); // Geçmiş bir tarih vererek cache süresi kontrolünü atlat
+            await LoadCustomersAsync(customerCodes);
+        }
+
+        /// <summary>
+        /// Cache süresi kontrolü olmadan banka hesapları cache'ini zorla günceller
+        /// </summary>
+        public async Task ForceReloadBankAccountsAsync(List<string> bankAccountCodes)
+        {
+            _bankAccountCacheLastUpdate = DateTime.MinValue.AddYears(1);
+            await LoadBankAccountsAsync(bankAccountCodes);
+        }
+
+        /// <summary>
+        /// Cache süresi kontrolü olmadan dinamik alan cache'ini zorla günceller
+        /// </summary>
+        public async Task ForceReloadDynamicFieldsByEndpointAsync(List<string> codes, string endpoint)
+        {
+            _dynamicFieldCacheLastUpdate = DateTime.MinValue.AddYears(1);
+            await LoadDynamicFieldsByEndpointAsync(codes, endpoint);
+        }
+
+        /// <summary>
+        /// Firma bilgisi ve döviz kurları için force reload
+        /// </summary>
+        public void ForceReloadFirmInfoAndExchangeRates()
+        {
+            _longCacheLastUpdate = DateTime.MinValue.AddYears(1);
+            LoadCommonDataAsync().Wait();
+        }
     }
 } 
