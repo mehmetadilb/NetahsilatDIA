@@ -11,7 +11,10 @@ namespace CommonLib
 {
     public static class JsonDbManager
     {
-        private static readonly string _filePath = "Parameters.json";
+        private static readonly string _filePath = Path.Combine(
+            Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+            "Parameters.json"
+        );
         private static readonly object _lockObject = new object();
 
         public static GlobalParameters GlobalParameters { get; private set; } = new GlobalParameters();
@@ -100,10 +103,20 @@ namespace CommonLib
             }
         }
 
+        private static string GetFullPath(string filePath)
+        {
+            if (Path.IsPathRooted(filePath))
+                return filePath;
+            string exeDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            return Path.Combine(exeDir, filePath);
+        }
+
         public static T LoadFromFile<T>(string filePath) where T : new()
         {
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentException("Dosya yolu boş olamaz.", nameof(filePath));
+
+            filePath = GetFullPath(filePath);
 
             lock (_lockObject)
             {
@@ -144,6 +157,8 @@ namespace CommonLib
 
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentException("Dosya yolu boş olamaz.", nameof(filePath));
+
+            filePath = GetFullPath(filePath);
 
             lock (_lockObject)
             {

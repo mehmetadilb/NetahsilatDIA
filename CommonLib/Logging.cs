@@ -37,6 +37,9 @@ public static class Logging
         {
             lock (_jsonLogLock)
             {
+                // Log dosyası path'i, her zaman exe'nin olduğu klasöre göre ayarlanır:
+                // string basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                // Böylece servis hangi klasörden başlatılırsa başlatılsın, loglar o klasöre yazılır.
                 string basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 string logPath = Path.Combine(basePath, "Log", "GunlukJson");
                 Directory.CreateDirectory(logPath);

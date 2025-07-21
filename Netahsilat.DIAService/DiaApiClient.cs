@@ -156,9 +156,13 @@ namespace Netahsilat.DIAService
                 }
                 catch (Exception ex)
                 {
-                    Logging.AddLog($"Login sırasında hata oluştu. Hata: {ex.Message} StackTrace: {ex.StackTrace}");
+                    var realEx = ex;
+                    if (ex is AggregateException aggEx && aggEx.InnerExceptions.Count > 0)
+                        realEx = aggEx.InnerExceptions[0];
+
+                    Logging.AddLog($"Login sırasında hata oluştu. Hata: {realEx.Message} StackTrace: {realEx.StackTrace}");
                     _sessionId = null;
-                    return new LoginResponse { Code = -1, Message = ex.Message };
+                    return new LoginResponse { Code = -1, Message = realEx.Message };
                 }
             }
         }
