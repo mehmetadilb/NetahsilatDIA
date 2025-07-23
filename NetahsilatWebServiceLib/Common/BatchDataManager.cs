@@ -21,8 +21,9 @@ namespace NetahsilatWebServiceLib.Common
         private readonly Dictionary<string, CurrentAccountModel> _customerCache = new Dictionary<string, CurrentAccountModel>();
         private readonly Dictionary<string, long> _bankAccountCache = new Dictionary<string, long>();
         private readonly Dictionary<string, long> _dynamicFieldCache = new Dictionary<string, long>();
-        private dynamic _cachedFirmInfo;
+        private DiaFirmInfoModel _cachedFirmInfo;
         private List<DiaExchangeModel> _cachedExchangeRates;
+        private List<DiaFirmParameterModel> _cachedFirmParameters;
         
 
         
@@ -162,9 +163,20 @@ namespace NetahsilatWebServiceLib.Common
                             .GroupBy(x => x.CurrencyId)
                             .Select(g => g.OrderByDescending(x => x.Date).First())
                             .ToList();
-                        
-                        _longCacheLastUpdate = DateTime.Now;
+
                         Logging.AddLog($"Döviz kuru cache'e eklendi. {_cachedExchangeRates?.Count ?? 0} adet kur bulundu.");
+                    }
+                }
+                // Firma parametrelerini yükle
+                if (DateTime.Now - _longCacheLastUpdate > _cacheExpiration)
+                {
+                    var firmInfoResponse = DIARepository.Get(DiaEndPoints.Keys.DIAPARAMETER);
+                    if (firmInfoResponse != null)
+                    {
+                        var json = JsonConvert.SerializeObject(firmInfoResponse);
+                        List<DiaFirmParameterModel> firmParameters = JsonConvert.DeserializeObject<List<DiaFirmParameterModel>>(json);
+                        _cachedFirmParameters = firmParameters;
+                        Logging.AddLog("Firma parametreleri cache'e eklendi.");
                     }
                 }
 
@@ -177,7 +189,7 @@ namespace NetahsilatWebServiceLib.Common
             }
         }
 
-        private List<string> GetCustomerCodes(PaymentServiceModel payment)
+        public List<string> GetCustomerCodes(PaymentServiceModel payment)
         {
             var codes = new List<string>();
 
@@ -569,6 +581,10 @@ namespace NetahsilatWebServiceLib.Common
             return _customerCache.Values.ToList();
         }
 
+        public List<DiaFirmParameterModel> GetDiaFirmParameters()
+        {
+            return _cachedFirmParameters;
+        }
 
 
         public void ClearCache()
@@ -580,6 +596,7 @@ namespace NetahsilatWebServiceLib.Common
             // Cache'leri temizle
             _cachedFirmInfo = null;
             _cachedExchangeRates = null;
+            _cachedFirmParameters = null;
             _longCacheLastUpdate = DateTime.MinValue;
             _customerCacheLastUpdate = DateTime.MinValue;
             _bankAccountCacheLastUpdate = DateTime.MinValue;
@@ -615,7 +632,7 @@ namespace NetahsilatWebServiceLib.Common
         /// <summary>
         /// Firma bilgisi ve döviz kurları için force reload
         /// </summary>
-        public void ForceReloadFirmInfoAndExchangeRates()
+        public void ForceReloadCommonData()
         {
             _longCacheLastUpdate = DateTime.MinValue.AddYears(1);
             LoadCommonDataAsync().Wait();

@@ -101,6 +101,8 @@
     <Compile Include="Enum\PaymentSuccessStatus.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Model\BankPaymentBackPlan.cs" />
+    <Compile Include="Model\DiaFirmParameterModel.cs" />
+    <Compile Include="Model\DiaTopTransactionTypeModel.cs" />
     <Compile Include="Model\SyncData.cs" />
     <Compile Include="Model\KeyValueModel.cs" />
     <Compile Include="Model\CurrentAccountTransactionModel.cs" />

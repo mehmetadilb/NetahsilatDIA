@@ -216,35 +216,57 @@ namespace NetahsilatWebServiceLib.Accounts
             }
         }
 
+        private SyncData<T> ReadSyncData<T>(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    var syncJson = File.ReadAllText(path);
+                    if (!string.IsNullOrEmpty(syncJson))
+                    {
+                        if (syncJson.TrimStart().StartsWith("{"))
+                        {
+                            var loadedSyncData = JsonConvert.DeserializeObject<SyncData<T>>(syncJson);
+                            if (loadedSyncData != null)
+                                return loadedSyncData;
+                        }
+                        else
+                        {
+                            var data = JsonConvert.DeserializeObject<List<T>>(syncJson) ?? new List<T>();
+                            return new SyncData<T> { LastSync = DateTime.MinValue, Data = data };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.AddLog($"ReadSyncData error: {ex.Message}");
+            }
+            return new SyncData<T> { LastSync = DateTime.MinValue, Data = new List<T>() };
+        }
+
+        private void WriteSyncData<T>(string path, SyncData<T> data)
+        {
+            try
+            {
+                File.WriteAllText(path, JsonConvert.SerializeObject(data, Formatting.Indented));
+                Logging.AddLog($"Toplam kayıt sayısı: {data.Data.Count}");
+            }
+            catch (Exception ex)
+            {
+                Logging.AddLog($"WriteSyncData error: {ex.Message}");
+            }
+        }
+
         public void SendAccountTransaction(string accountCode = "", bool isManuel = false)
         {
             Logging.AddLog("Cari hesap hareketleri aktarılacak");
             try
             {
-                DateTime lastSync = DateTime.MinValue;
-                List<AccountTransaction> existingTransactions = new List<AccountTransaction>();
-                try
-                {
-                    var syncJson = File.Exists("AccountTransactions.json") ? File.ReadAllText("AccountTransactions.json") : null;
-                    if (!string.IsNullOrEmpty(syncJson))
-                    {
-                        if (syncJson.TrimStart().StartsWith("{"))
-                        {
-                            var loadedSyncData = JsonConvert.DeserializeObject<SyncData<AccountTransaction>>(syncJson);
-                            if (loadedSyncData != null)
-                                lastSync = loadedSyncData.LastSync;
-                            existingTransactions = loadedSyncData?.Data ?? new List<AccountTransaction>();
-                        }
-                        else
-                        {
-                            existingTransactions = JsonConvert.DeserializeObject<List<AccountTransaction>>(syncJson) ?? new List<AccountTransaction>();
-                        }
-                    }
-                }
-                catch
-                {
-                    existingTransactions = new List<AccountTransaction>();
-                }
+                var syncData = ReadSyncData<AccountTransaction>("AccountTransactions.json");
+                DateTime lastSync = syncData.LastSync;
+                List<AccountTransaction> existingTransactions = syncData.Data;
 
                 var myParamList = new List<CATCreateOrUpdateParameters>();
                 var currentAccountTransactionAll = new List<CurrentAccountTransactionModel>();
@@ -338,7 +360,7 @@ namespace NetahsilatWebServiceLib.Accounts
             }
             catch (Exception ex)
             {
-                Logging.AddLog(string.Format("SendAccountTransaction - Hata : {0}", ex.Message));
+                Logging.AddLog($"SendAccountTransaction - Hata : {ex.Message}");
                 throw new Exception(ex.Message);
             }
         }

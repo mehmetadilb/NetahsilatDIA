@@ -27,6 +27,7 @@ namespace NetahsilatWebServiceLib.Models
         public int AccounttingAccountId { get; set; }
         public DynamicFieldsModel DynamicFields { get; set; }
         public ReversalServiceModel Reversal { get; internal set; }
+        public DiaTopTransactionTypeModel TopTransactionType { get; internal set; }
     }
 
     public class CreditCardReversalFicheParameters : BaseCreditCardFicheParameters

@@ -77,6 +77,8 @@
             this.txtPublicDescriptionFormat = new System.Windows.Forms.TextBox();
             this.txtLineDescriptionFormat = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtTopTransactionCode = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFirms)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -449,6 +451,8 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.txtTopTransactionCode, 1, 8);
+            this.tableLayoutPanel3.Controls.Add(this.label9, 0, 8);
             this.tableLayoutPanel3.Controls.Add(this.txtNonCustomerBagAccount, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.label8, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.cmbNonCustomerPaymentType, 1, 4);
@@ -656,6 +660,25 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 248);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(75, 13);
+            this.label9.TabIndex = 70;
+            this.label9.Text = "Üst İşlem Türü";
+            // 
+            // txtTopTransactionCode
+            // 
+            this.txtTopTransactionCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTopTransactionCode.Location = new System.Drawing.Point(221, 245);
+            this.txtTopTransactionCode.Name = "txtTopTransactionCode";
+            this.txtTopTransactionCode.Size = new System.Drawing.Size(213, 20);
+            this.txtTopTransactionCode.TabIndex = 71;
+            this.txtTopTransactionCode.Tag = "TOP_TRANSACTION_CODE";
+            // 
             // frmParametersConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -737,6 +760,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblSendTransferTrans;
         private System.Windows.Forms.CheckBox chkSendTransferTrans;
+        private System.Windows.Forms.TextBox txtTopTransactionCode;
+        private System.Windows.Forms.Label label9;
     }
 }
 
