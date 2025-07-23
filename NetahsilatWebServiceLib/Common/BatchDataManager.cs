@@ -137,8 +137,9 @@ namespace NetahsilatWebServiceLib.Common
                     var firmInfoResponse = DIARepository.Get(DiaEndPoints.Keys.COMPANY);
                     if (firmInfoResponse != null)
                     {
-                        _cachedFirmInfo = firmInfoResponse;
-                        _longCacheLastUpdate = DateTime.Now;
+                        var json = JsonConvert.SerializeObject(firmInfoResponse);
+                        DiaFirmInfoModel firmInfo = JsonConvert.DeserializeObject<DiaFirmInfoModel>(json);
+                        _cachedFirmInfo = firmInfo;
                         Logging.AddLog("Firma bilgisi cache'e eklendi.");
                     }
                 }
@@ -167,6 +168,7 @@ namespace NetahsilatWebServiceLib.Common
                     }
                 }
 
+                _longCacheLastUpdate = DateTime.Now;
                 Logging.AddLog("Ortak veriler yükleme tamamlandı.");
             }
             catch (Exception ex)
@@ -222,10 +224,23 @@ namespace NetahsilatWebServiceLib.Common
                     return;
                 }
 
+                var activeFirm = Config.GlobalParameters.Parameters.Firms?.FirstOrDefault(f => f.IsActive);
+                if (activeFirm == null)
+                {
+                    Logging.AddLog("Aktif firma bulunamadı.");
+                    return;
+                }
+
                 // Sadece aktif (durumu A olan) cari hesapları çek
-                var _params = new BaseApiRequestParams()
-                    .AddFilter("A", "durumu", FilterTypes.EQUAL)
-                    .AddSort("_key", SortTypes.DESC);
+                var _params = new BaseApiRequestParams();
+
+                if (customerCodes?.Count == 1)
+                    _params.AddFilter(customerCodes?[0], "carikartkodu", FilterTypes.EQUAL);
+
+                _params.AddFilter("A", "durumu", FilterTypes.EQUAL)
+                     .AddFilter(activeFirm.Company.ToString(), "level1", FilterTypes.EQUAL)
+                     .AddFilter(activeFirm.Period.ToString(), "level2", FilterTypes.EQUAL)
+                     .AddSort("_key", SortTypes.DESC);
 
                 var response = DIARepository.List(DiaEndPoints.Keys.CURRENTACCOUNT, _params);
 

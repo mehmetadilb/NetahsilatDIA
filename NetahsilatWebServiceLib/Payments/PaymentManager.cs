@@ -435,9 +435,12 @@ namespace NetahsilatWebServiceLib.Payments
                         var currentAccountCode = String.Empty;
                         var currentAccount = GetCustomer(payment.AccountErpCode, payment.Agent);
 
-                        if (currentAccount == null || String.IsNullOrEmpty(currentAccount.Code))
+                        if (currentAccount == null || String.IsNullOrEmpty(currentAccount.Code) && !string.IsNullOrEmpty(payment.AccountErpCode) && forceReloadIfMissing)
                         {
-                            throw new Exception($"Cari bilgisi DİA veritabanında bulunamadı! Cari Kod: {payment.AccountErpCode}");
+                            _batchDataManager.ForceReloadCustomersAsync(new List<string> { payment.AccountErpCode }).Wait();
+                            currentAccount = GetCustomer(payment.AccountErpCode, payment.Agent);
+                            if (currentAccount == null)
+                                throw new Exception($"Cari bilgisi DİA veritabanında bulunamadı! Cari Kod: {payment.AccountErpCode}");
                         }
 
                         //Ödeme yapılana sanal posun tipini alırız. Netahsilat posu ise Virman fişi kesilecek.
@@ -653,6 +656,8 @@ namespace NetahsilatWebServiceLib.Payments
                     {
                         throw new Exception($"Kredi kartı fişi eklenemedi({result.Message}). Ödeme Referans Kodu: {payment.ReferenceCode} Ödeme Id: {payment.PaymentId}");
                     }
+
+                    Logging.AddLog($"Kredi kartı fişi oluşturuldu. Fiş Numarası: {voucherNumber}");
                 }
                 catch (Exception ex)
                 {
@@ -677,7 +682,7 @@ namespace NetahsilatWebServiceLib.Payments
             if(creditCardFicheParameters.FirmInfoModel.Branches.Count > 0)
             {
                 model._key_sis_sube = new ExpandoObject();
-                model._key_sis_sube.subekodu = creditCardFicheParameters.FirmInfoModel.Branches[0].Code;
+                model._key_sis_sube._key = creditCardFicheParameters.FirmInfoModel.Branches[0].Id;
             }
             else
                 model._key_sis_sube = 0;
@@ -739,7 +744,7 @@ namespace NetahsilatWebServiceLib.Payments
             if(creditCardFicheParameters.FirmInfoModel.Branches.Count > 0)
             {
                 model._key_sis_sube = new ExpandoObject();
-                model._key_sis_sube.subekodu = creditCardFicheParameters.FirmInfoModel.Branches[0].Code;
+                model._key_sis_sube._key = creditCardFicheParameters.FirmInfoModel.Branches[0].Id;
             }
             else
                 model._key_sis_sube = 0;
