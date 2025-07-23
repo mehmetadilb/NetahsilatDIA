@@ -26,6 +26,7 @@ namespace NetahsilatWebServiceLib.Models
         public string RePaymentPlanCode { get; set; }
         public int AccounttingAccountId { get; set; }
         public DynamicFieldsModel DynamicFields { get; set; }
+        public ReversalServiceModel Reversal { get; internal set; }
     }
 
     public class CreditCardReversalFicheParameters : BaseCreditCardFicheParameters

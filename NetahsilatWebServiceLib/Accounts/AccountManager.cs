@@ -85,15 +85,69 @@ namespace NetahsilatWebServiceLib.Accounts
         {
             try
             {
+                // Local AccountTransactions.json okuma (SyncData ve eski format destekli)
+                List<AccountTransaction> existingTransactions = new List<AccountTransaction>();
+                try
+                {
+                    var syncJson = File.Exists("AccountTransactions.json") ? File.ReadAllText("AccountTransactions.json") : null;
+                    if (!string.IsNullOrEmpty(syncJson))
+                    {
+                        if (syncJson.TrimStart().StartsWith("{"))
+                        {
+                            var loadedSyncData = JsonConvert.DeserializeObject<SyncData<AccountTransaction>>(syncJson);
+                            if (loadedSyncData != null)
+                                existingTransactions = loadedSyncData.Data ?? new List<AccountTransaction>();
+                        }
+                        else
+                        {
+                            existingTransactions = JsonConvert.DeserializeObject<List<AccountTransaction>>(syncJson) ?? new List<AccountTransaction>();
+                        }
+                    }
+                }
+                catch
+                {
+                    existingTransactions = new List<AccountTransaction>();
+                }
+
                 Logging.AddLog("Daha önce aktarımı başarısız olanlar ve güncellenmiş olan cari hesap hareketleri aktarılacak");
 
                 var myParamList = new List<CATCreateOrUpdateParameters>();
                 var currentAccountTransactionAll = new List<CurrentAccountTransactionModel>();
 
                 Logging.AddLog("Cari hesap hareketleri API'den yükleniyor.");
-                var diaResult = DIARepository.List(DiaEndPoints.Keys.CURRENTACCOUNTFICHE, null, DiaEndPoints.Suffixes.DETAILED_LIST);
-                var json = JsonConvert.SerializeObject(diaResult);
-                currentAccountTransactionAll = JsonConvert.DeserializeObject<List<CurrentAccountTransactionModel>>(json);
+                int limit = 200;
+                int offset = 0;
+                bool hasMore = true;
+
+                while (hasMore)
+                {
+                    var _params = new BaseApiRequestParams()
+                        .AddFilter(ConfigHelper.DiaFirmaKodu.ToString(),"level1",FilterTypes.EQUAL)
+                        .AddFilter(ConfigHelper.DiaDonemKodu.ToString(), "level2", FilterTypes.EQUAL)
+                        .Limit(limit)
+                        .Offset(offset);
+
+                    var diaResult = DIARepository.List(DiaEndPoints.Keys.CURRENTACCOUNTFICHE, _params, DiaEndPoints.Suffixes.DETAILED_LIST);
+
+                    if (diaResult == null)
+                        break;
+
+                    var json = JsonConvert.SerializeObject(diaResult);
+                    var batchList = JsonConvert.DeserializeObject<List<CurrentAccountTransactionModel>>(json);
+
+                    if (batchList == null || batchList.Count == 0)
+                    {
+                        hasMore = false;
+                        break;
+                    }
+
+                    currentAccountTransactionAll.AddRange(batchList);
+
+                    if (batchList.Count < limit)
+                        hasMore = false;
+                    else
+                        offset += limit;
+                }
 
                 _cachedTransactionKeys = currentAccountTransactionAll?.Select(x => x.Key).ToHashSet() ?? new HashSet<string>();
 
@@ -103,14 +157,9 @@ namespace NetahsilatWebServiceLib.Accounts
                     return;
                 }
 
-                var activeFirm = Config.GlobalParameters.Parameters.Firms?.FirstOrDefault(f => f.IsActive);
-
-                var localFailedTransactions = JsonDbManager.LoadFromFile<List<AccountTransaction>>("AccountTransactions.json")
-                    ?.Where(x => x.Firm == activeFirm?.Company && x.Period == activeFirm?.Period && x.Deleted == false)
-                    .ToList() ?? new List<AccountTransaction>();
-
-                var localDict = localFailedTransactions.ToDictionary(x => x.TransId);
-
+                var localDict = existingTransactions
+                    .Where(x => x.Firm == ConfigHelper.DiaFirmaKodu && x.Period == ConfigHelper.DiaDonemKodu && x.Deleted == false)
+                    .ToDictionary(x => x.TransId);
                 var filteredList = new List<CurrentAccountTransactionModel>();
 
                 foreach (var apiRecord in currentAccountTransactionAll)
@@ -172,16 +221,39 @@ namespace NetahsilatWebServiceLib.Accounts
             Logging.AddLog("Cari hesap hareketleri aktarılacak");
             try
             {
+                DateTime lastSync = DateTime.MinValue;
+                List<AccountTransaction> existingTransactions = new List<AccountTransaction>();
+                try
+                {
+                    var syncJson = File.Exists("AccountTransactions.json") ? File.ReadAllText("AccountTransactions.json") : null;
+                    if (!string.IsNullOrEmpty(syncJson))
+                    {
+                        if (syncJson.TrimStart().StartsWith("{"))
+                        {
+                            var loadedSyncData = JsonConvert.DeserializeObject<SyncData<AccountTransaction>>(syncJson);
+                            if (loadedSyncData != null)
+                                lastSync = loadedSyncData.LastSync;
+                            existingTransactions = loadedSyncData?.Data ?? new List<AccountTransaction>();
+                        }
+                        else
+                        {
+                            existingTransactions = JsonConvert.DeserializeObject<List<AccountTransaction>>(syncJson) ?? new List<AccountTransaction>();
+                        }
+                    }
+                }
+                catch
+                {
+                    existingTransactions = new List<AccountTransaction>();
+                }
+
                 var myParamList = new List<CATCreateOrUpdateParameters>();
                 var currentAccountTransactionAll = new List<CurrentAccountTransactionModel>();
 
                 Logging.AddLog("Cari hesap hareketleri API'den yükleniyor.");
 
-
                 int limit = 200;
                 int offset = 0;
                 bool hasMore = true;
-
 
                 while (hasMore)
                 {
@@ -190,6 +262,14 @@ namespace NetahsilatWebServiceLib.Accounts
                         .AddFilter(ConfigHelper.DiaDonemKodu.ToString(), "level2", FilterTypes.EQUAL)
                         .Limit(limit)
                         .Offset(offset);
+                    if (!string.IsNullOrEmpty(accountCode))
+                    {
+                        _params.AddFilter(accountCode, "carikartkodu", FilterTypes.EQUAL);
+                    }
+                    else if (lastSync > DateTime.MinValue)
+                    {
+                        _params.AddFilter(lastSync.ToString("yyyy-MM-dd"), "_date", FilterTypes.GREATER_THEN_OR_EQUAL);
+                    }
 
                     var diaResult = DIARepository.List(DiaEndPoints.Keys.CURRENTACCOUNTFICHE, _params, DiaEndPoints.Suffixes.DETAILED_LIST);
 
@@ -220,10 +300,9 @@ namespace NetahsilatWebServiceLib.Accounts
                     Logging.AddLog("Yeni cari hesap hareketi bulunamadı.");
                     return;
                 }
-                var activeFirm = Config.GlobalParameters.Parameters.Firms?.FirstOrDefault(f => f.IsActive);
 
-                var localCurrentAccountTransactions = JsonDbManager.LoadFromFile<List<AccountTransaction>>("AccountTransactions.json")
-                    ?.Where(x => x.Firm == activeFirm?.Company && x.Period == activeFirm?.Period && x.Deleted == false)
+                var localCurrentAccountTransactions = existingTransactions
+                    ?.Where(x => x.Firm == ConfigHelper.DiaFirmaKodu && x.Period == ConfigHelper.DiaDonemKodu && x.Deleted == false)
                     .ToList() ?? new List<AccountTransaction>();
 
                 var localDict = localCurrentAccountTransactions.ToDictionary(x => x.TransId);
@@ -319,12 +398,25 @@ namespace NetahsilatWebServiceLib.Accounts
             }
 
             string jsonPath = "AccountTransactions.json";
-            var existingTransactions = new List<AccountTransaction>();
+            List<AccountTransaction> existingTransactions = new List<AccountTransaction>();
+            DateTime lastSync = DateTime.MinValue;
 
             if (File.Exists(jsonPath))
             {
                 var existingJson = File.ReadAllText(jsonPath);
-                existingTransactions = JsonConvert.DeserializeObject<List<AccountTransaction>>(existingJson) ?? new List<AccountTransaction>();
+                if (!string.IsNullOrEmpty(existingJson) && existingJson.TrimStart().StartsWith("{"))
+                {
+                    var syncData = JsonConvert.DeserializeObject<SyncData<AccountTransaction>>(existingJson);
+                    if (syncData != null)
+                    {
+                        lastSync = syncData.LastSync;
+                        existingTransactions = syncData.Data ?? new List<AccountTransaction>();
+                    }
+                }
+                else
+                {
+                    existingTransactions = JsonConvert.DeserializeObject<List<AccountTransaction>>(existingJson) ?? new List<AccountTransaction>();
+                }
             }
 
             foreach (var trx in allTransactions)
@@ -345,8 +437,20 @@ namespace NetahsilatWebServiceLib.Accounts
                     existingTransactions.Add(trx);
                 }
             }
-
-            JsonDbManager.SaveToFile(existingTransactions, jsonPath);
+            var syncDataToSave = new SyncData<AccountTransaction>
+            {
+                LastSync = DateTime.Now,
+                Data = existingTransactions
+            };
+            try
+            {
+                File.WriteAllText(jsonPath, JsonConvert.SerializeObject(syncDataToSave, Formatting.Indented));
+                Logging.AddLog($"Cari hesap hareketleri JSON dosyasına kaydedildi. Toplam kayıt sayısı: {existingTransactions.Count}");
+            }
+            catch (Exception ex)
+            {
+                Logging.AddLog($"JSON dosyasına kaydetme hatası: {ex.Message}");
+            }
         }
 
         public void DeletedTrans()
@@ -362,12 +466,36 @@ namespace NetahsilatWebServiceLib.Accounts
                 Logging.AddLog("Silinen transaction key'leri cache'den alınıyor.");
                 var apiKeys = _cachedTransactionKeys;
 
-                var activeFirm = Config.GlobalParameters.Parameters.Firms?.FirstOrDefault(f => f.IsActive);
-
                 var jsonPath = "AccountTransactions.json";
+                List<AccountTransaction> localTransactions = new List<AccountTransaction>();
+                DateTime lastSync = DateTime.MinValue;
+                try
+                {
+                    var syncJson = File.Exists(jsonPath) ? File.ReadAllText(jsonPath) : null;
+                    if (!string.IsNullOrEmpty(syncJson))
+                    {
+                        if (syncJson.TrimStart().StartsWith("{"))
+                        {
+                            var syncData = JsonConvert.DeserializeObject<SyncData<AccountTransaction>>(syncJson);
+                            if (syncData != null)
+                            {
+                                lastSync = syncData.LastSync;
+                                localTransactions = syncData.Data ?? new List<AccountTransaction>();
+                            }
+                        }
+                        else
+                        {
+                            localTransactions = JsonConvert.DeserializeObject<List<AccountTransaction>>(syncJson) ?? new List<AccountTransaction>();
+                        }
+                    }
+                }
+                catch
+                {
+                    localTransactions = new List<AccountTransaction>();
+                }
 
-                var localTransactions = JsonDbManager.LoadFromFile<List<AccountTransaction>>(jsonPath)
-                    ?.Where(x => x.Firm == activeFirm?.Company && x.Period == activeFirm?.Period)
+                localTransactions = localTransactions
+                    ?.Where(x => x.Firm == ConfigHelper.DiaFirmaKodu && x.Period == ConfigHelper.DiaDonemKodu)
                     .ToList() ?? new List<AccountTransaction>();
 
                 var deletedTransactions = localTransactions
@@ -424,7 +552,20 @@ namespace NetahsilatWebServiceLib.Accounts
                     }
                 }
 
-                JsonDbManager.SaveToFile(localTransactions, jsonPath);
+                var syncDataToSave = new SyncData<AccountTransaction>
+                {
+                    LastSync = lastSync,
+                    Data = localTransactions
+                };
+                try
+                {
+                    File.WriteAllText(jsonPath, JsonConvert.SerializeObject(syncDataToSave, Formatting.Indented));
+                    Logging.AddLog($"Cari hesap hareketleri JSON dosyasına kaydedildi. Toplam kayıt sayısı: {localTransactions.Count}");
+                }
+                catch (Exception ex)
+                {
+                    Logging.AddLog($"JSON dosyasına kaydetme hatası: {ex.Message}");
+                }
 
                 _cachedTransactionKeys = null;
             }
@@ -439,12 +580,23 @@ namespace NetahsilatWebServiceLib.Accounts
         {
             Logging.AddLog("Cari hesapların aktarım işlemleri başlıyor...");
 
-
-            var activeFirm = Config.GlobalParameters.Parameters.Firms?.FirstOrDefault(f => f.IsActive);
-            if (activeFirm == null)
+            DateTime lastSync = DateTime.MinValue;
+            try
             {
-                Logging.AddLog("Aktif firma bulunamadı.");
-                return null;
+                var syncJson = File.Exists("CurrentAccount.json") ? File.ReadAllText("CurrentAccount.json") : null;
+                if (!string.IsNullOrEmpty(syncJson))
+                {
+                    if (syncJson.TrimStart().StartsWith("{"))
+                    {
+                        var syncData = JsonConvert.DeserializeObject<SyncData<CurrentAccountLogModel>>(syncJson);
+                        if (syncData != null)
+                            lastSync = syncData.LastSync;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
 
             if (!string.IsNullOrEmpty(accountCode))
@@ -453,9 +605,11 @@ namespace NetahsilatWebServiceLib.Accounts
                     .AddFilter("", "eposta", FilterTypes.NOT_EQUAL)
                     .AddFilter("1", "__dinamik__nteaktar", FilterTypes.EQUAL)
                     .AddFilter(accountCode, "carikartkodu", FilterTypes.EQUAL)
-                    .AddFilter(activeFirm.Company.ToString(),"level1",FilterTypes.EQUAL)
-                    .AddFilter(activeFirm.Period.ToString(), "level2", FilterTypes.EQUAL)
+                    .AddFilter(ConfigHelper.DiaFirmaKodu.ToString(),"level1",FilterTypes.EQUAL)
+                    .AddFilter(ConfigHelper.DiaDonemKodu.ToString(), "level2", FilterTypes.EQUAL)
                     .AddSort("_key", SortTypes.DESC);
+                if (lastSync > DateTime.MinValue)
+                    specificParams.AddFilter(lastSync.ToString("yyyy-MM-dd HH:mm:ss"), "_date", FilterTypes.GREATER_THEN_OR_EQUAL);
 
                 var specificResponse = DIARepository.List(DiaEndPoints.Keys.CURRENTACCOUNT, specificParams);
 
@@ -467,22 +621,18 @@ namespace NetahsilatWebServiceLib.Accounts
                 return specificAccounts;
             }
 
-            // Önce BatchDataManager'dan almayı dene
             if (_batchDataManager != null)
             {
                 var batchData = _batchDataManager.GetCurrentAccounts();
                 if (batchData != null && batchData.Any())
                 {
                     Logging.AddLog("Cari hesaplar BatchDataManager'dan alınıyor ve filtreleniyor.");
-                    // BatchDataManager'dan gelen verileri filtrele ve döndür
                     return batchData
-                        .Where(x => !string.IsNullOrEmpty(x.MailAddress)) // Eposta boş olmamalı
-                        .Where(x => x.NteAktar == "1") // NTE Aktar = 1 olmalı
+                        .Where(x => !string.IsNullOrEmpty(x.MailAddress))
+                        .Where(x => x.NteAktar == "1")
                         .ToList();
                 }
             }
-
-            // BatchDataManager'dan veri gelmezse API'den çek
 
             int limit = 200;
             int offset = 0;
@@ -496,10 +646,12 @@ namespace NetahsilatWebServiceLib.Accounts
                     .AddFilter("", "eposta", FilterTypes.NOT_EQUAL)
                     .AddFilter("1", "__dinamik__nteaktar", FilterTypes.EQUAL)
                     .AddSort("_key", SortTypes.DESC)
-                    .AddFilter(activeFirm.Company.ToString(), "level1", FilterTypes.EQUAL)
-                    .AddFilter(activeFirm.Period.ToString(), "level2", FilterTypes.EQUAL)
+                    .AddFilter(ConfigHelper.DiaFirmaKodu.ToString(), "level1", FilterTypes.EQUAL)
+                    .AddFilter(ConfigHelper.DiaDonemKodu.ToString(), "level2", FilterTypes.EQUAL)
                     .Limit(limit)
                     .Offset(offset);
+                if (lastSync > DateTime.MinValue)
+                    allParams.AddFilter(lastSync.ToString("yyyy-MM-dd"), "_date", FilterTypes.GREATER_THEN_OR_EQUAL);
 
                 var allResponse = DIARepository.List(DiaEndPoints.Keys.CURRENTACCOUNT, allParams);
 
@@ -520,14 +672,12 @@ namespace NetahsilatWebServiceLib.Accounts
                 }
                 else
                 {
-                    // Artık veri kalmadı
                     hasMore = false;
                     break;
                 }
 
                 allCurrentAccounts.AddRange(currentBatch);
 
-                // Eğer çekilen veri limiti doldurmadıysa son sayfaya ulaştık demektir
                 if (currentBatch.Count < limit)
                     hasMore = false;
                 else
@@ -539,26 +689,44 @@ namespace NetahsilatWebServiceLib.Accounts
 
         public void SendAccount(bool isDaily = false, string accountCode = "")
         {
+
+            DateTime lastSync = DateTime.MinValue;
+            List<CurrentAccountLogModel> existingLogs = new List<CurrentAccountLogModel>();
+            try
+            {
+                var syncJson = File.Exists("CurrentAccount.json") ? File.ReadAllText("CurrentAccount.json") : null;
+                if (!string.IsNullOrEmpty(syncJson))
+                {
+                    if (syncJson.TrimStart().StartsWith("{"))
+                    {
+                        var loadSyncData = JsonConvert.DeserializeObject<SyncData<CurrentAccountLogModel>>(syncJson);
+                        if (loadSyncData != null)
+                            lastSync = loadSyncData.LastSync;
+                        existingLogs = loadSyncData?.Data ?? new List<CurrentAccountLogModel>();
+                    }
+                    else
+                    {
+                        existingLogs = JsonConvert.DeserializeObject<List<CurrentAccountLogModel>>(syncJson) ?? new List<CurrentAccountLogModel>();
+                    }
+                }
+            }
+            catch
+            {
+                existingLogs = new List<CurrentAccountLogModel>();
+            }
+
             var currentAccounts = GetCurrentAccounts(accountCode);
 
-            if (currentAccounts.Count < 0 )
+            if (currentAccounts == null || currentAccounts.Count < 0 )
             {
                 Logging.AddLog("Aktarılacak cari hesap bulunamadı.");
                 return;
             }
 
-            var activeFirm = Config.GlobalParameters.Parameters.Firms?.FirstOrDefault(f => f.IsActive);
-            if (activeFirm == null)
-            {
-                Logging.AddLog("Aktif firma bulunamadı.");
-                return;
-            }
-
-            var localCurrentAccounts = JsonDbManager.LoadFromFile<List<CurrentAccountLogModel>>("CurrentAccount.json")
-                                          ?.Where(x => x.Firm == activeFirm.Company
-                                                   && x.Period == activeFirm.Period)
+            var localCurrentAccounts = existingLogs
+                                          ?.Where(x => x.Firm == ConfigHelper.DiaFirmaKodu
+                                                   && x.Period == ConfigHelper.DiaDonemKodu)
                                           .ToList() ?? new List<CurrentAccountLogModel>();
-            
             var successfulCodes = localCurrentAccounts.Where(x => x.Status).ToDictionary(x => x.Code, x => x.RecordDate);
 
             List<CurrentAccountModel> transferCurrentAccounts = new List<CurrentAccountModel>();
@@ -595,16 +763,6 @@ namespace NetahsilatWebServiceLib.Accounts
                     .ToList();
 
                 Logging.AddLog($"{transferCurrentAccounts.Count} adet cari hesap aktarılacak");
-            }
-
-            var existingLogs = new List<CurrentAccountLogModel>();
-            try
-            {
-                existingLogs = JsonDbManager.LoadFromFile<List<CurrentAccountLogModel>>("CurrentAccount.json");
-            }
-            catch
-            {
-                existingLogs = new List<CurrentAccountLogModel>();
             }
 
             foreach (CurrentAccountModel currentAccount in transferCurrentAccounts)
@@ -725,7 +883,21 @@ namespace NetahsilatWebServiceLib.Accounts
                     UpdateCurrentAccountLog(existingLogs, currentAccount, message, isSuccess);
                 }
             }
-            SaveCurrentAccountLog(existingLogs);
+            // SyncData ile kaydet
+            var syncData = new SyncData<CurrentAccountLogModel>
+            {
+                LastSync = DateTime.Now,
+                Data = existingLogs
+            };
+            try
+            {
+                File.WriteAllText("CurrentAccount.json", JsonConvert.SerializeObject(syncData, Formatting.Indented));
+                Logging.AddLog($"Cari hesaplar JSON dosyasına kaydedildi. Toplam kayıt sayısı: {existingLogs.Count}");
+            }
+            catch (Exception ex)
+            {
+                Logging.AddLog($"JSON dosyasına kaydetme hatası: {ex.Message}");
+            }
         }
 
 

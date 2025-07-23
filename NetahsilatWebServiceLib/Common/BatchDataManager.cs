@@ -224,13 +224,6 @@ namespace NetahsilatWebServiceLib.Common
                     return;
                 }
 
-                var activeFirm = Config.GlobalParameters.Parameters.Firms?.FirstOrDefault(f => f.IsActive);
-                if (activeFirm == null)
-                {
-                    Logging.AddLog("Aktif firma bulunamadı.");
-                    return;
-                }
-
                 // Sadece aktif (durumu A olan) cari hesapları çek
                 var _params = new BaseApiRequestParams();
 
@@ -238,8 +231,8 @@ namespace NetahsilatWebServiceLib.Common
                     _params.AddFilter(customerCodes?[0], "carikartkodu", FilterTypes.EQUAL);
 
                 _params.AddFilter("A", "durumu", FilterTypes.EQUAL)
-                     .AddFilter(activeFirm.Company.ToString(), "level1", FilterTypes.EQUAL)
-                     .AddFilter(activeFirm.Period.ToString(), "level2", FilterTypes.EQUAL)
+                     .AddFilter(ConfigHelper.DiaFirmaKodu.ToString(), "level1", FilterTypes.EQUAL)
+                     .AddFilter(ConfigHelper.DiaDonemKodu.ToString(), "level2", FilterTypes.EQUAL)
                      .AddSort("_key", SortTypes.DESC);
 
                 var response = DIARepository.List(DiaEndPoints.Keys.CURRENTACCOUNT, _params);
