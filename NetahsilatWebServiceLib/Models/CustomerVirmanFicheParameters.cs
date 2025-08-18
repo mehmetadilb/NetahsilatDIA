@@ -20,5 +20,6 @@ namespace NetahsilatWebServiceLib.Models
         public CurrencyModel CurrencyModel { get; set; }
         public string RePaymentPlanCode { get; set; }
         public bool ForceReloadIfMissing { get; set; }
+        public DiaTopTransactionTypeModel TopTransactionType { get; internal set; }
     }
 }

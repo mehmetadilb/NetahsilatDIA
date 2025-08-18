@@ -16,6 +16,7 @@ namespace CommonLib.Model
         public string ContractNumber { get; set; } = String.Empty;
         public string ReserveNumber { get; set; } = String.Empty;
         public string SpecialCode { get; set; } = String.Empty;
+        public string TopTransactionTypeCode {  get; set; } = String.Empty; 
 
     }
 }
