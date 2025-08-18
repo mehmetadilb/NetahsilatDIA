@@ -22,6 +22,7 @@ namespace NetahsilatWebServiceLib
             dynamicFieldsModel.DepartmentCode = GetDynamicValue("departmentcode", paymentServiceModel);
             dynamicFieldsModel.ReserveNumber = GetDynamicValue("rezervno", paymentServiceModel);
             dynamicFieldsModel.SpecialCode = GetDynamicValue("specode", paymentServiceModel);
+            dynamicFieldsModel.TopTransactionTypeCode = GetDynamicValue("toptransactiontypecode", paymentServiceModel);
 
             return dynamicFieldsModel;
         }
@@ -38,6 +39,7 @@ namespace NetahsilatWebServiceLib
             dynamicFieldsModel.DepartmentCode = GetDynamicValue("departmentcode", reversalServiceModel);
             dynamicFieldsModel.ReserveNumber = GetDynamicValue("rezervno", reversalServiceModel);
             dynamicFieldsModel.SpecialCode = GetDynamicValue("specode", reversalServiceModel);
+            dynamicFieldsModel.TopTransactionTypeCode = GetDynamicValue("toptransactiontypecode", reversalServiceModel);
 
             return dynamicFieldsModel;
         }

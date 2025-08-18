@@ -39,6 +39,7 @@ namespace CommonLib
         public ReceiptTypeToBeTransferred RECEIPT_TYPE_TO_BE_TRANSFERRED { get; set; }
         public string WORK_HOURS { get; set; }
         public bool GET_BANK_PAYMENT { get; set; }
+        public string TOP_TRANSACTION_CODE { get; set; }
     }
     public class CustomerPaymentSet
     {

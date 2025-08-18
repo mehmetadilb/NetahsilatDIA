@@ -226,7 +226,7 @@ namespace Netahsilat.DIAService.Model
         public const string LESS_THAN = "<";
         public const string GREATER_THEN = ">";
         public const string LESS_THAN_OR_EQUAL = "<=";
-        public const string GREATER_THEN_OR_EQUA = ">=";
+        public const string GREATER_THEN_OR_EQUAL = ">=";
         public const string EQUAL = "=";
         public const string NOT_EQUAL = "!";
         public const string IN = "IN";
