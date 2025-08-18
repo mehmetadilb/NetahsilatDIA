@@ -21,8 +21,9 @@ namespace NetahsilatWebServiceLib.Common
         private readonly Dictionary<string, CurrentAccountModel> _customerCache = new Dictionary<string, CurrentAccountModel>();
         private readonly Dictionary<string, long> _bankAccountCache = new Dictionary<string, long>();
         private readonly Dictionary<string, long> _dynamicFieldCache = new Dictionary<string, long>();
-        private dynamic _cachedFirmInfo;
+        private DiaFirmInfoModel _cachedFirmInfo;
         private List<DiaExchangeModel> _cachedExchangeRates;
+        private List<DiaFirmParameterModel> _cachedFirmParameters;
         
 
         
@@ -137,8 +138,9 @@ namespace NetahsilatWebServiceLib.Common
                     var firmInfoResponse = DIARepository.Get(DiaEndPoints.Keys.COMPANY);
                     if (firmInfoResponse != null)
                     {
-                        _cachedFirmInfo = firmInfoResponse;
-                        _longCacheLastUpdate = DateTime.Now;
+                        var json = JsonConvert.SerializeObject(firmInfoResponse);
+                        DiaFirmInfoModel firmInfo = JsonConvert.DeserializeObject<DiaFirmInfoModel>(json);
+                        _cachedFirmInfo = firmInfo;
                         Logging.AddLog("Firma bilgisi cache'e eklendi.");
                     }
                 }
@@ -161,12 +163,24 @@ namespace NetahsilatWebServiceLib.Common
                             .GroupBy(x => x.CurrencyId)
                             .Select(g => g.OrderByDescending(x => x.Date).First())
                             .ToList();
-                        
-                        _longCacheLastUpdate = DateTime.Now;
+
                         Logging.AddLog($"Döviz kuru cache'e eklendi. {_cachedExchangeRates?.Count ?? 0} adet kur bulundu.");
                     }
                 }
+                // Firma parametrelerini yükle
+                if (DateTime.Now - _longCacheLastUpdate > _cacheExpiration)
+                {
+                    var firmInfoResponse = DIARepository.Get(DiaEndPoints.Keys.DIAPARAMETER);
+                    if (firmInfoResponse != null)
+                    {
+                        var json = JsonConvert.SerializeObject(firmInfoResponse);
+                        List<DiaFirmParameterModel> firmParameters = JsonConvert.DeserializeObject<List<DiaFirmParameterModel>>(json);
+                        _cachedFirmParameters = firmParameters;
+                        Logging.AddLog("Firma parametreleri cache'e eklendi.");
+                    }
+                }
 
+                _longCacheLastUpdate = DateTime.Now;
                 Logging.AddLog("Ortak veriler yükleme tamamlandı.");
             }
             catch (Exception ex)
@@ -175,7 +189,7 @@ namespace NetahsilatWebServiceLib.Common
             }
         }
 
-        private List<string> GetCustomerCodes(PaymentServiceModel payment)
+        public List<string> GetCustomerCodes(PaymentServiceModel payment)
         {
             var codes = new List<string>();
 
@@ -223,9 +237,15 @@ namespace NetahsilatWebServiceLib.Common
                 }
 
                 // Sadece aktif (durumu A olan) cari hesapları çek
-                var _params = new BaseApiRequestParams()
-                    .AddFilter("A", "durumu", FilterTypes.EQUAL)
-                    .AddSort("_key", SortTypes.DESC);
+                var _params = new BaseApiRequestParams();
+
+                if (customerCodes?.Count == 1)
+                    _params.AddFilter(customerCodes?[0], "carikartkodu", FilterTypes.EQUAL);
+
+                _params.AddFilter("A", "durumu", FilterTypes.EQUAL)
+                     .AddFilter(ConfigHelper.DiaFirmaKodu.ToString(), "level1", FilterTypes.EQUAL)
+                     .AddFilter(ConfigHelper.DiaDonemKodu.ToString(), "level2", FilterTypes.EQUAL)
+                     .AddSort("_key", SortTypes.DESC);
 
                 var response = DIARepository.List(DiaEndPoints.Keys.CURRENTACCOUNT, _params);
 
@@ -402,6 +422,7 @@ namespace NetahsilatWebServiceLib.Common
 
                 // Sadece aktif dinamik alanları çek (durumu A olan)
                 var _params = new BaseApiRequestParams()
+                    .AddFilter(codes.FirstOrDefault(),"kodu",FilterTypes.EQUAL)
                     .AddFilter("A", "durumu", FilterTypes.EQUAL)
                     .AddSort("_key", SortTypes.DESC);
 
@@ -561,6 +582,10 @@ namespace NetahsilatWebServiceLib.Common
             return _customerCache.Values.ToList();
         }
 
+        public List<DiaFirmParameterModel> GetDiaFirmParameters()
+        {
+            return _cachedFirmParameters;
+        }
 
 
         public void ClearCache()
@@ -572,6 +597,7 @@ namespace NetahsilatWebServiceLib.Common
             // Cache'leri temizle
             _cachedFirmInfo = null;
             _cachedExchangeRates = null;
+            _cachedFirmParameters = null;
             _longCacheLastUpdate = DateTime.MinValue;
             _customerCacheLastUpdate = DateTime.MinValue;
             _bankAccountCacheLastUpdate = DateTime.MinValue;
@@ -607,7 +633,7 @@ namespace NetahsilatWebServiceLib.Common
         /// <summary>
         /// Firma bilgisi ve döviz kurları için force reload
         /// </summary>
-        public void ForceReloadFirmInfoAndExchangeRates()
+        public void ForceReloadCommonData()
         {
             _longCacheLastUpdate = DateTime.MinValue.AddYears(1);
             LoadCommonDataAsync().Wait();

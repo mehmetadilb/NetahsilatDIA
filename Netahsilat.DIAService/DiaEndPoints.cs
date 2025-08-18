@@ -28,6 +28,7 @@
             public const string COMPANY = "sis_firma";
             public const string EXCHANGERATES = "sis_doviz_kuru";
             public const string BANKPAYBACKPLAN = "scf_banka_odeme_plani";
+            public const string MODULES = "sis_uye_bilgi";
         }
     }
 }
